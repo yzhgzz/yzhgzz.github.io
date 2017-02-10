@@ -96,19 +96,16 @@
 
 
 
-<meta name="description" content="1. 前言查阅了很多资料，踩了很多的坑之后，一个拥有独立域名的静态博客终于搭建完成。本文主要叙述了利用github和hexo搭建博客的过程和心得，一方面希望给同样想搭建独立域名的静态博客的朋友一些启发与引导，另一方面也是给自己的个人笔记，记录下来以后不会遗忘。本文主要针对windows用户。
-2. Github和Hexo介绍GitHub 是现在非常火热的一个面向开源及私有软件项目的托管平台，这里我">
+<meta name="description" content="1. 前言查阅了很多资料，踩了很多的坑之后，一个拥有独立域名的静态博客终于搭建完成。本文主要叙述了利用github和hexo搭建博客的过程和心得，一方面希望给同样想搭建独立域名的静态博客的朋友一些启发与引导，另一方面也是给自己的个人笔记，记录下来以后不会遗忘。本文主要针对windows用户。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Github+Hexo搭建独立域名的静态博客">
 <meta property="og:url" content="http://yinzhehao.top/2016/09/20/Github+Hexo搭建独立域名的静态博客/index.html">
 <meta property="og:site_name" content="Yinzhehao blog">
-<meta property="og:description" content="1. 前言查阅了很多资料，踩了很多的坑之后，一个拥有独立域名的静态博客终于搭建完成。本文主要叙述了利用github和hexo搭建博客的过程和心得，一方面希望给同样想搭建独立域名的静态博客的朋友一些启发与引导，另一方面也是给自己的个人笔记，记录下来以后不会遗忘。本文主要针对windows用户。
-2. Github和Hexo介绍GitHub 是现在非常火热的一个面向开源及私有软件项目的托管平台，这里我">
-<meta property="og:updated_time" content="2017-02-10T03:18:14.436Z">
+<meta property="og:description" content="1. 前言查阅了很多资料，踩了很多的坑之后，一个拥有独立域名的静态博客终于搭建完成。本文主要叙述了利用github和hexo搭建博客的过程和心得，一方面希望给同样想搭建独立域名的静态博客的朋友一些启发与引导，另一方面也是给自己的个人笔记，记录下来以后不会遗忘。本文主要针对windows用户。">
+<meta property="og:updated_time" content="2017-02-10T03:40:45.842Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Github+Hexo搭建独立域名的静态博客">
-<meta name="twitter:description" content="1. 前言查阅了很多资料，踩了很多的坑之后，一个拥有独立域名的静态博客终于搭建完成。本文主要叙述了利用github和hexo搭建博客的过程和心得，一方面希望给同样想搭建独立域名的静态博客的朋友一些启发与引导，另一方面也是给自己的个人笔记，记录下来以后不会遗忘。本文主要针对windows用户。
-2. Github和Hexo介绍GitHub 是现在非常火热的一个面向开源及私有软件项目的托管平台，这里我">
+<meta name="twitter:description" content="1. 前言查阅了很多资料，踩了很多的坑之后，一个拥有独立域名的静态博客终于搭建完成。本文主要叙述了利用github和hexo搭建博客的过程和心得，一方面希望给同样想搭建独立域名的静态博客的朋友一些启发与引导，另一方面也是给自己的个人笔记，记录下来以后不会遗忘。本文主要针对windows用户。">
 
 
 
@@ -390,7 +387,7 @@
       
 
       
-        <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h2><p>查阅了很多资料，踩了很多的坑之后，一个拥有独立域名的静态博客终于搭建完成。本文主要叙述了利用<strong>github</strong>和<strong>hexo</strong>搭建博客的过程和心得，一方面希望给同样想搭建独立域名的静态博客的朋友一些启发与引导，另一方面也是给自己的个人笔记，记录下来以后不会遗忘。本文主要针对windows用户。</p>
+        <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h2><p>查阅了很多资料，踩了很多的坑之后，一个拥有独立域名的静态博客终于搭建完成。本文主要叙述了利用<strong>github</strong>和<strong>hexo</strong>搭建博客的过程和心得，一方面希望给同样想搭建独立域名的静态博客的朋友一些启发与引导，另一方面也是给自己的个人笔记，记录下来以后不会遗忘。本文主要针对windows用户。<br><a id="more"></a> </p>
 <h2 id="2-Github和Hexo介绍"><a href="#2-Github和Hexo介绍" class="headerlink" title="2. Github和Hexo介绍"></a>2. Github和Hexo介绍</h2><p>GitHub 是现在非常火热的一个面向开源及私有软件项目的托管平台，这里我们使用<strong>github pages</strong>服务搭建博客，使用这个服务的优势在于全是静态文件，访问速度很快，而且免费方便，不需要自己管理服务器和后台，可以将精力都放在博文的撰写上，同时还可以绑定自己的个人域名等。具体参考<a href="https://github.com/" target="_blank" rel="external">github官方网站</a>。</p>
 <p>Hexo是一款基于Node.js的静态博客框架，它的优势主要在于简便和快速，它支持多进程，支持GitHub Flavored Markdown和所有Octopress的插件，同时还拥有良好的扩展性，支持EJS、Swig和Stylus，并通过插件支持Haml、Jade和Less。具体参考<a href="https://hexo.io" target="_blank" rel="external">hexo官方网站</a>。</p>
 <h2 id="3-搭建过程"><a href="#3-搭建过程" class="headerlink" title="3. 搭建过程"></a>3. 搭建过程</h2><h3 id="3-1-安装Git"><a href="#3-1-安装Git" class="headerlink" title="3.1 安装Git"></a>3.1 安装Git</h3><p>进入<a href="https://git-scm.com/" target="_blank" rel="external">git官方网站</a>下载并安装git，按照操作提示走就可以了。</p>
