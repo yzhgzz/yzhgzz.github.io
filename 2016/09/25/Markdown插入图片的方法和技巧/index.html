@@ -63,17 +63,11 @@
   
 
   
-    
-      
-    
-
-    
-  
 
   
     
     
-    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -108,7 +102,7 @@
 <meta property="og:url" content="http://yinzhehao.top/2016/09/25/Markdown插入图片的方法和技巧/index.html">
 <meta property="og:site_name" content="Yinzhehao blog">
 <meta property="og:description" content="Markdown是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有一定的格式。Markdown的语法简洁明了、学习容易，而且功能比纯文本更强，因此有 很多人用它写博客。世界上最流行的博客平台WordPress和大型CMS如Joomla、Drupal都能很好的支持Markdown,完全采用Markdown编辑器的博客平台有Ghost和Typecho。本人在自学过">
-<meta property="og:updated_time" content="2017-01-29T10:16:39.259Z">
+<meta property="og:updated_time" content="2017-02-10T03:02:39.302Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Markdown插入图片的方法和技巧">
 <meta name="twitter:description" content="Markdown是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有一定的格式。Markdown的语法简洁明了、学习容易，而且功能比纯文本更强，因此有 很多人用它写博客。世界上最流行的博客平台WordPress和大型CMS如Joomla、Drupal都能很好的支持Markdown,完全采用Markdown编辑器的博客平台有Ghost和Typecho。本人在自学过">
@@ -405,7 +399,7 @@
 <p>说明：<code>/path/to/img.png</code>为图片所在的路径，可以是本地图片路径，也可以是网上图片路径；<code>width</code>后面填的是希望设置的图片宽度；<code>height</code>后面填的是希望设置的图片高度；<code>alt</code>后面填写的是图片的名称。</p>
 <p>方法三是直接利用html的 <code>&lt;image&gt;</code>标签来插入图片，它最大的优势在于可以指定图片的大小。</p>
 <h2 id="Markdown插入图片的技巧"><a href="#Markdown插入图片的技巧" class="headerlink" title="Markdown插入图片的技巧"></a>Markdown插入图片的技巧</h2><h3 id="技巧一-使用Mou编辑器来更改图片大小"><a href="#技巧一-使用Mou编辑器来更改图片大小" class="headerlink" title="技巧一 使用Mou编辑器来更改图片大小"></a>技巧一 使用Mou编辑器来更改图片大小</h3><p>要想改变图片的大小，除了用上面方法三的方法之外，还可以利用Mou编辑器达到目的。<br>语法结构如下：<br><code>![Alt text](/path/to/img.png =width*height)</code><br>其实总体语法结构是与方法一相似的，就是后面加上了<code>=width*height</code>,这里就写上所想要设置的宽度和高度即可。这里需要注意的是<code>=</code>前面还有一个空格，不要漏掉。</p>
-<h3 id="技巧二-使图片居中显示"><a href="#技巧二-使图片居中显示" class="headerlink" title="技巧二 使图片居中显示"></a>技巧二 使图片居中显示</h3><p>方法很简单，利用html标签中的<code>&lt;div&gt;</code>即可做到。具体操作是在外面包围div标签并设置<code>align</code>属性为<code>center</code>即可:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div  align=&quot;center&quot;&gt;    </div><div class="line">...</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="技巧二-使图片居中显示"><a href="#技巧二-使图片居中显示" class="headerlink" title="技巧二 使图片居中显示"></a>技巧二 使图片居中显示</h3><p>方法很简单，利用html标签中的<code>&lt;div&gt;</code>即可做到。具体操作是在外面包围div标签并设置<code>align</code>属性为<code>center</code>即可:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span>  <span class="attr">align</span>=<span class="string">"center"</span>&gt;</span>    </div><div class="line">...</div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <h3 id="技巧三-用网址路径插入图片"><a href="#技巧三-用网址路径插入图片" class="headerlink" title="技巧三 用网址路径插入图片"></a>技巧三 用网址路径插入图片</h3><p>用本地路径有时会出现各种各样的问题，而如果用网址路径相对而言就不会出错，这里主要推荐两种方法：</p>
 <p>a、首先找一个类似于CloudApp、Droplr的网络分享软件，然后把图片放进去，生成一个网址，最后把这个网址复制到markdown前面方法中提到的<code>/path/to/img.png</code>中即可。</p>
 <p>b、通过github储存图片来达到目的。首先将需要的照片放到本地的git仓库中，并提交和发布到github上面，然后访问自己的github，找到那张图片，打开图片，选择Raw按钮，这时你会看到一个页面只有那张图片，这时将此链接地址复制下来，最后把这个网址复制到markdown前面方法中提到的<code>/path/to/img.png</code>中即可。</p>
@@ -513,7 +507,7 @@
                src="/images/homepage/yymhk.png"
                alt="Yin Zhehao" />
           <p class="site-author-name" itemprop="name">Yin Zhehao</p>
-          <p class="site-description motion-element" itemprop="description">正经人中最不正经的 不正经人中最正经的</p>
+          <p class="site-description motion-element" itemprop="description">饮水思源 止于至善</p>
         </div>
         <nav class="site-state motion-element">
         
@@ -601,6 +595,17 @@
   <span class="author" itemprop="copyrightHolder">Yin Zhehao</span>
 </div>
 
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
 
 
         

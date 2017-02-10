@@ -503,7 +503,7 @@ pre,
 }
 pre,
 code {
-  font-family: 'PT Mono', consolas, Menlo, "PingFang SC", "Microsoft YaHei", monospace;
+  font-family: consolas, Menlo, "PingFang SC", "Microsoft YaHei", monospace;
 }
 code {
   padding: 2px 4px;
@@ -1686,7 +1686,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #591aeb;
+  background: #422bff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2849,4 +2849,25 @@ a.search-result {
   .post-body {
     text-align: justify;
   }
+}
+code {
+  color: #c7254e;
+  background: #f9f2f4;
+  margin: 2px;
+  border: 1px solid #d6d6d6;
+}
+.highlight,
+pre {
+  margin: 5px 0;
+  padding: 5px;
+  border: 1px solid #d6d6d6;
+  border-radius: 3px;
+}
+.post-body p a {
+  color: #0593d3;
+  border-bottom: none;
+}
+.post-body p a:hover {
+  color: #0477ab;
+  text-decoration: underline;
 }
