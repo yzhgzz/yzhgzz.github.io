@@ -1,0 +1,929 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="html,css,javascript,demo,ajax," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/homepage/favicon6.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="前言本篇博文主要记录和总结了我在练习制作明星介绍网站demo过程中的一些心得和技巧，主要有三篇，这篇侧重于对表单部分实现的阐述和总结。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="明星介绍网站练习总结(三)">
+<meta property="og:url" content="http://yinzhehao.top/2016/11/27/明星介绍网站练习总结(三)/index.html">
+<meta property="og:site_name" content="Yinzhehao blog">
+<meta property="og:description" content="前言本篇博文主要记录和总结了我在练习制作明星介绍网站demo过程中的一些心得和技巧，主要有三篇，这篇侧重于对表单部分实现的阐述和总结。">
+<meta property="og:updated_time" content="2017-02-24T09:15:52.488Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="明星介绍网站练习总结(三)">
+<meta name="twitter:description" content="前言本篇博文主要记录和总结了我在练习制作明星介绍网站demo过程中的一些心得和技巧，主要有三篇，这篇侧重于对表单部分实现的阐述和总结。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yinzhehao.top/2016/11/27/明星介绍网站练习总结(三)/"/>
+
+
+
+
+
+  <title> 明星介绍网站练习总结(三) | Yinzhehao blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Yinzhehao blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle">Try my best</p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yinzhehao.top/2016/11/27/明星介绍网站练习总结(三)/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Yin Zhehao">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/homepage/yymhk.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Yinzhehao blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Yinzhehao blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                明星介绍网站练习总结(三)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-27T17:51:14+08:00">
+                2016-11-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Front-end/" itemprop="url" rel="index">
+                    <span itemprop="name">Front-end</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本篇博文主要记录和总结了我在练习制作明星介绍网站demo过程中的一些心得和技巧，主要有三篇，这篇侧重于对表单部分实现的阐述和总结。<br><a id="more"></a> </p>
+<h2 id="心得与技巧"><a href="#心得与技巧" class="headerlink" title="心得与技巧"></a>心得与技巧</h2><h3 id="表单部分实现"><a href="#表单部分实现" class="headerlink" title="表单部分实现"></a>表单部分实现</h3><p>对于一个明星介绍网站来说，联系信息的公布还是比较重要的，所以很有必要构建一个联系表单。这里为了方便展示，我们不利用服务器端脚本来处理发送到后台的信息，而仅是创建一个html页面来进行调用来对提交信息的访客表示感谢。</p>
+<h4 id="页面设置"><a href="#页面设置" class="headerlink" title="页面设置"></a>页面设置</h4><p>这里会用的一些html5的标签，设置的表单联系信息主要包括访客的姓名、电子邮箱和想告诉作者的话等。具体代码实现如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;article&gt;</div><div class="line">	&lt;h1&gt;联系作者&lt;/h1&gt;</div><div class="line">    &lt;form method=<span class="string">"post"</span> action=<span class="string">"thanks.html"</span>&gt;</div><div class="line">    	&lt;label for="name"&gt;姓名：&lt;/label&gt;</div><div class="line">        &lt;input type=<span class="string">"text"</span> id=<span class="string">"name"</span> placeholder=<span class="string">"请输入您的名字"</span> required /&gt;</div><div class="line">        &lt;label for="email"&gt;邮箱：&lt;/label&gt;</div><div class="line">        &lt;input type=<span class="string">"email"</span> id=<span class="string">"email"</span> placeholder=<span class="string">"请输入您的邮箱"</span> required /&gt;</div><div class="line">        &lt;label for="textarea"&gt;留言:&lt;/label&gt;</div><div class="line">        &lt;textarea placeholder=<span class="string">"请输入您想告诉作者的话..."</span> required&gt;&lt;/textarea&gt;</div><div class="line">        &lt;input type=<span class="string">"submit"</span> value=<span class="string">"提交"</span> /&gt;</div><div class="line">    &lt;/form&gt;</div><div class="line">&lt;<span class="regexp">/article&gt;</span></div></pre></td></tr></table></figure>
+<p>需要说明和注意的地方主要有以下几点：</p>
+<ul>
+<li>整个表单需要放在<code>form</code>标签内，其中<code>method</code>是用来发送表单数据的http方法，这里使用的是<code>post</code>方法。<code>action</code>是规定当提交表单时向何处发送表单数据。这里补充引用w3school网站的一段话来说明一下<a href="http://www.w3school.com.cn/tags/att_form_method.asp" target="_blank" rel="external">post和get方法的选择</a>问题。</li>
+</ul>
+<blockquote>
+<ul>
+<li>如果希望获得最佳表单传输性能，可以采用 GET 方法发送只有少数简短字段的小表单。</li>
+<li>一些服务器操作系统在处理可以立即传递给应用程序的命令行参数时，会限制其数目和长度，在这种情况下，对那些有许多字段或是很长的文本域的表单来说，就应该采用 POST 方法来发送。</li>
+<li>如果你在编写服务器端的表单处理应用程序方面经验不足，应该选择 GET 方法。如果采用 POST 方法，就要在读取和解码方法做些额外的工作，也许这并不很难，但是也许你不太愿意去处理这些问题。</li>
+<li>如果安全性是个问题，那么我们建议选用 POST 方法。GET 方法将表单参数直接放在应用程序的 URL 中，这样网络窥探者可以很轻松地捕获它们，还可以从服务器的日志文件中进行摘录。如果参数中包含了信用卡帐号这样的敏感信息，就会在不知不觉中危及用户的安全。而 POST 应用程序就没有安全方面的漏洞，在将参数作为单独的事务传输给服务器进行处理时，至少还可以采用加密的方法。</li>
+<li>如果想在表单之外调用服务器端的应用程序，而且包括向其传递参数的过程，就要采用 GET 方法，因为该方法允许把表单这样的参数包括进来作为 URL 的一部分。而另一方面，使用 POST 样式的应用程序却希望在 URL 后还能有一个来自浏览器额外的传输过程，其中传输的内容不能作为传统a标签的内容。</li>
+</ul>
+</blockquote>
+<ul>
+<li><code>label</code>标签的使用，整个属性容易被忽略，但其实它可以通过<code>for</code>属性把一小段文本关联到表单的一个字段，可以增加可访问性，而尤其对于屏幕阅读器来说更是不可或缺。</li>
+<li>HTML5的<code>placeholder</code>属性可以添加占位符文本，即在表单字段中显示默认的提示文本，会使用户觉得友好。还有HTML5提供的required属性，用于表示某个字段的值是必须填写不能留空的。</li>
+<li>提交按钮的type属性得设置为<code>submit</code>，这样才能当用户点击提交按钮时触发提交表单的操作。</li>
+</ul>
+<h4 id="form对象"><a href="#form对象" class="headerlink" title="form对象"></a>form对象</h4><p>文档中的每个表单元素其实都是一个form对象，每个form对象都有一个<code>elements.length</code>属性。这个属性返回表单中的包含的表单元素的个数。<br>与childNodes.length相比较，后者是返回元素中国包含的所有节点的个数，而前者仅包含表单元素，所以两者是不同的。同理可知，form.elements是返回表单元素的数组，取得对应表单元素之后可以方便对之进行一些操作。</p>
+<h4 id="兼容旧版本对placeholder属性的不支持"><a href="#兼容旧版本对placeholder属性的不支持" class="headerlink" title="兼容旧版本对placeholder属性的不支持"></a>兼容旧版本对placeholder属性的不支持</h4><p>前面我们用<code>placeholder</code>属性添加了占位符文本，但是考虑到这是HTML5的特性，一些旧浏览器可能不会兼容，所以我们需要编写一个函数，使旧浏览器不兼容的时候也能达到相应效果。下面是函数的函数体：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (Modernizr.input.placeholder) <span class="keyword">return</span>;</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;whichform.elements.length; i++) &#123;</div><div class="line">    <span class="keyword">var</span> element = whichform.elements[i];</div><div class="line">    <span class="keyword">if</span> (element.type == <span class="string">"submit"</span>) <span class="keyword">continue</span>;</div><div class="line">    <span class="keyword">if</span> (!element.getAttribute(<span class="string">'placeholder'</span>)) <span class="keyword">continue</span>;</div><div class="line">    element.onfocus = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.value == <span class="keyword">this</span>.getAttribute(<span class="string">'placeholder'</span>)) &#123;</div><div class="line">      <span class="keyword">this</span>.value = <span class="string">""</span>;</div><div class="line">     &#125;</div><div class="line">    &#125;</div><div class="line">    element.onblur = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="keyword">if</span> (<span class="keyword">this</span>.value == <span class="string">""</span>) &#123;</div><div class="line">        <span class="keyword">this</span>.value = <span class="keyword">this</span>.getAttribute(<span class="string">'placeholder'</span>);</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    element.onblur();</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>首先我们检测浏览器是否支持<code>placeholder</code>属性，这里我们用到Modernizr，它是一个用来检测浏览器功能支持情况的 JavaScript 库。通过这个库我们可以检测不同的浏览器对于HTML5特性的支持情况。</li>
+<li>然后我们通过前面说到的form对象的方法对表单元素进行循环遍历，并且跳过提交按钮，对它不做处理。</li>
+<li>之后对原本元素里面的placeholder属性进行判断，如果有值则进行下面的操作。</li>
+<li>最后添加两个事件处理函数，一个是<code>onfocus</code>事件，表单元素获得焦点时触发，一个是<code>onblur</code>事件，焦点移出表单字段时触发。这样我们就可以通过元素的value属性和className属性来对表单元素设置和移除默认值和样式了。</li>
+</ul>
+<h4 id="表单验证"><a href="#表单验证" class="headerlink" title="表单验证"></a>表单验证</h4><p>好的客户端验证可以帮助用户填好表单，避免提交未完成的表单，从而节省他们的时间。但是值得一提的是，服务器端的验证也是必不可少的，可以保护数据库和后台系统的安全，并不能被客户端验证所取代。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">isFilled</span>(<span class="params">field</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> (field.value.length &gt; <span class="number">1</span> &amp;&amp; field.value != field.placeholder);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个函数检查了<code>value</code>属性的<code>length</code>属性，就能知道value中是不是没有任何字符，同时也比较<code>value</code>属性和<code>placeholder</code>属性的值，就可以知道用户是否对占位符文本没有改动，只有通过这两个验证才能返回true。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">isEmail</span>(<span class="params">field</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> (field.value.indexOf(<span class="string">"@"</span>) != <span class="number">-1</span> &amp;&amp; field.value.indexOf(<span class="string">"."</span>) != <span class="number">-1</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>同样的，在对于电子邮件格式的检查上，我们至少需要确保表单字段中包含<code>@</code>和<code>.</code>这两个符号，才能使之通过验证，返回true。<br>当然，我们也可以在css上或者是js上进行一些设置与处理，当无法通过验证时，样式发生改变或是出现一些提示性文字。</p>
+<p>值得注意的地方是，我们可以通过<code>onsubmit</code>事件处理函数来添加验证行为，而且提交表单时的自动触发的<code>submit</code>事件，会被<code>onsubmit</code>事件所拦截，只有返回true的时候，才能使表单数据提交给服务器。</p>
+<h4 id="表单提交"><a href="#表单提交" class="headerlink" title="表单提交"></a>表单提交</h4><p>我们知道，<strong>Ajax</strong>技术的核心就是<code>XMLHTTPRequest</code>对象，它充当着浏览器的脚本(客户端)与服务器之间的中间人的角色。但是不同浏览器实现<code>XMLHTTPRequest</code>对象的方式不太一样。为了保证浏览器的兼容性，需要编写函数来获得不同类型或版本浏览器下的<code>XMLHTTPRequest</code>对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getHTTPObject</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> XMLHttpRequest == <span class="string">"undefined"</span>)</div><div class="line">    XMLHttpRequest = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="keyword">try</span> &#123; <span class="keyword">return</span> <span class="keyword">new</span> ActiveXObject(<span class="string">"Msxml2.XMLHTTP.6.0"</span>); &#125;</div><div class="line">        <span class="keyword">catch</span> (e) &#123;&#125;</div><div class="line">      <span class="keyword">try</span> &#123; <span class="keyword">return</span> <span class="keyword">new</span> ActiveXObject(<span class="string">"Msxml2.XMLHTTP.3.0"</span>); &#125;</div><div class="line">        <span class="keyword">catch</span> (e) &#123;&#125;</div><div class="line">      <span class="keyword">try</span> &#123; <span class="keyword">return</span> <span class="keyword">new</span> ActiveXObject(<span class="string">"Msxml2.XMLHTTP"</span>); &#125;</div><div class="line">        <span class="keyword">catch</span> (e) &#123;&#125;</div><div class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>前三个判断中主要是为了兼容不同IE版本浏览器中获得<code>XMLHTTPRequest</code>对象的方法。而其他浏览器中的相关方法主要就<code>是new XMLHttpRequest();</code></p>
+<p>为了增加对用户的友好性，可以在Ajax请求刚启动时添加显示一个“正在载入”的图像，函数如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">displayAjaxLoading</span>(<span class="params">element</span>) </span>&#123;</div><div class="line">     <span class="keyword">while</span> (element.hasChildNodes()) &#123;</div><div class="line">      element.removeChild(element.lastChild);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">var</span> content = <span class="built_in">document</span>.createElement(<span class="string">"img"</span>);</div><div class="line">  content.setAttribute(<span class="string">"src"</span>,<span class="string">"images/loading.gif"</span>);</div><div class="line">  content.setAttribute(<span class="string">"alt"</span>,<span class="string">"Loading..."</span>);</div><div class="line">  element.appendChild(content);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>具体做法是先把此dom元素里面的子元素全部删除，然后动态创建这个加载图像的元素。动态创建的过程主要是<code>document.createElement()</code>方法创建新元素，<code>setAttribute()</code>方法增加新元素的属性值，最后<code>appendChild()</code>方法添加入页面中。</p>
+<p>接下来很重要的一步是将表单的值组织成URL编码的字符串，方法是循环遍历表单的每个字段，然后得到他们的名字和值，这里有个需要注意的地方，那些值中的一些特殊符号可能会带来歧义，从而引出传输的问题，所以需要用<code>encodeURIComponent</code>函数把值编码成URL安全的字符串，可以把有歧义的字符串转换成对应的ASCII编码。之后把数据用<code>join</code>函数联结即可 。具体代码如下：‘</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> dataParts = [];</div><div class="line">  <span class="keyword">var</span> element;</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;whichform.elements.length; i++) &#123;</div><div class="line">    element = whichform.elements[i];</div><div class="line">    dataParts[i] = element.name + <span class="string">'='</span> + <span class="built_in">encodeURIComponent</span>(element.value);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">var</span> data = dataParts.join(<span class="string">'&amp;'</span>);</div></pre></td></tr></table></figure>
+<p>后面就是Ajax应用的一些正常步骤了：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">request.open(<span class="string">'POST'</span>, whichform.getAttribute(<span class="string">"action"</span>), <span class="literal">true</span>);</div><div class="line">  request.setRequestHeader(<span class="string">"Content-type"</span>, <span class="string">"application/x-www-form-urlencoded"</span>);</div><div class="line">  request.onreadystatechange = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (request.readyState == <span class="number">4</span>) &#123;</div><div class="line">        <span class="keyword">if</span> (request.status == <span class="number">200</span> || request.status == <span class="number">0</span>) &#123;</div><div class="line">		......</div><div class="line">		request.responseText</div><div class="line">		......</div><div class="line">		&#125;</div><div class="line">		request.send(data);</div><div class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</div></pre></td></tr></table></figure>
+<p>最后还需要注意的一点是，有必要运用添加<code>onsubmit</code>事件来阻止默认的<code>submit</code>事件，通过发送ajax请求的成功与否来判断是否应该阻止表单继续提交，这样可以阻止浏览器重复提交表单。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这篇博文是我练习制作明星介绍网站demo总结的第三篇，侧重于对表单部分实现的阐述和总结。至此，关于这个demo练习的总结已经结束，总体来说，这个demo练习全面锻炼了我的html、css、javascript和ajax等前端技术，尤其是对于javascript dom的编程能力大大提升，收获颇丰。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/html/" rel="tag"># html</a>
+          
+            <a href="/tags/css/" rel="tag"># css</a>
+          
+            <a href="/tags/javascript/" rel="tag"># javascript</a>
+          
+            <a href="/tags/demo/" rel="tag"># demo</a>
+          
+            <a href="/tags/ajax/" rel="tag"># ajax</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/26/明星介绍网站练习总结(二)/" rel="next" title="明星介绍网站练习总结(二)">
+                <i class="fa fa-chevron-left"></i> 明星介绍网站练习总结(二)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/homepage/yymhk.png"
+               alt="Yin Zhehao" />
+          <p class="site-author-name" itemprop="name">Yin Zhehao</p>
+          <p class="site-description motion-element" itemprop="description">饮水思源 止于至善</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#心得与技巧"><span class="nav-number">2.</span> <span class="nav-text">心得与技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#表单部分实现"><span class="nav-number">2.1.</span> <span class="nav-text">表单部分实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#页面设置"><span class="nav-number">2.1.1.</span> <span class="nav-text">页面设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#form对象"><span class="nav-number">2.1.2.</span> <span class="nav-text">form对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#兼容旧版本对placeholder属性的不支持"><span class="nav-number">2.1.3.</span> <span class="nav-text">兼容旧版本对placeholder属性的不支持</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#表单验证"><span class="nav-number">2.1.4.</span> <span class="nav-text">表单验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#表单提交"><span class="nav-number">2.1.5.</span> <span class="nav-text">表单提交</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yin Zhehao</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
