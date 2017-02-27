@@ -1,0 +1,914 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="javascript,DOM," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/homepage/favicon6.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="前言本博客记录总结了JavaScript关于DOM编程的一些最佳实践。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript关于DOM编程的最佳实践">
+<meta property="og:url" content="http://yinzhehao.top/2016/01/23/JavaScript关于DOM编程的最佳实践/index.html">
+<meta property="og:site_name" content="Yinzhehao blog">
+<meta property="og:description" content="前言本博客记录总结了JavaScript关于DOM编程的一些最佳实践。">
+<meta property="og:updated_time" content="2017-02-27T09:43:34.039Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript关于DOM编程的最佳实践">
+<meta name="twitter:description" content="前言本博客记录总结了JavaScript关于DOM编程的一些最佳实践。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yinzhehao.top/2016/01/23/JavaScript关于DOM编程的最佳实践/"/>
+
+
+
+
+
+  <title> JavaScript关于DOM编程的最佳实践 | Yinzhehao blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Yinzhehao blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle">Try my best</p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yinzhehao.top/2016/01/23/JavaScript关于DOM编程的最佳实践/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Yin Zhehao">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/homepage/yymhk.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Yinzhehao blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Yinzhehao blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                JavaScript关于DOM编程的最佳实践
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-01-23T17:51:14+08:00">
+                2016-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Front-end/" itemprop="url" rel="index">
+                    <span itemprop="name">Front-end</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本博客记录总结了JavaScript关于DOM编程的一些最佳实践。<br><a id="more"></a> </p>
+<h2 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h2><h3 id="web性能优化"><a href="#web性能优化" class="headerlink" title="web性能优化"></a>web性能优化</h3><ul>
+<li>尽量减少访问DOM<br>只要是查询DOM中的某些元素，浏览器都会搜索整个DOM树，从中查找可能匹配的元素。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(<span class="built_in">document</span>.getElementsByTagName(<span class="string">"a"</span>).length &gt; <span class="number">0</span>)</div><div class="line">&#123;</div><div class="line">	<span class="keyword">var</span> links = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"a"</span>);</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;links.length;i++)&#123;</div><div class="line">		<span class="comment">//do something</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>上述代码中，执行<code>document.getElementsByTagName(&quot;a&quot;).length</code>时，会搜索整个DOM树；执行<code>document.getElementsByTagName(&quot;a&quot;);</code>时，会再次搜索整个DOM树。当DOM元素较多时，搜索整个DOM树是一个很耗时的操作。针对上述代码，作出如下优化：将第一次DOM树搜索的结果保存至一个变量中，将搜索次数减少1次。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> links = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"a"</span>);</div><div class="line"><span class="keyword">if</span>(links.length &gt; <span class="number">0</span>)</div><div class="line">&#123;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;links.length;i++)&#123;</div><div class="line">		<span class="comment">//do something</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ul>
+<li>尽量减少文档中的标记数量。过多不必要的元素只会增加DOM树的规模，进而增加遍历DOM树以查找特定元素的时间。</li>
+<li>将多个js文件合并并放置在合适的位置<br>将多个js文件合并，可以减少HTTP请求次数。</li>
+</ul>
+<blockquote>
+<p>根据HTTP规范，浏览器每次从同一个域名中最多只能同时下载2个文件。</p>
+</blockquote>
+<p>将引入的外部js文件的<code>&lt;script&gt;</code>标签放置到文档的末尾（<code>&lt;/body&gt;</code>标签之前），可以使页面更快的加载。若将<code>&lt;script&gt;</code>标签放置于<code>&lt;head&gt;</code>中，则执行到<code>&lt;script&gt;</code>标签时，浏览器会先加载js文件，加载完成后才会执行<code>&lt;body&gt;</code>标签中的内容，才会创建DOM树，这样会影响页面加载速度。</p>
+<ul>
+<li>压缩脚本<br>脚本文件编写完成后，进行脚本压缩，可以减少文件体积，减轻服务器压力。在实际的工程中，可以保存2个版本的脚本：一个工作副本，用于修改，调试和注释；一个精简副本，压缩之后上传到服务器。精简副本（压缩后的脚本）一般在文件名中后缀上<code>min</code>进行标识。</li>
+</ul>
+<p>常用的脚本压缩工具如下所示。<br>[1] <a href="http://crockford.com/javascript/jsmin" target="_blank" rel="external">Douglas Crockford的JSMin</a><br>[2] <a href="http://yui.github.io/yuicompressor/" target="_blank" rel="external">Yahoo的YUI Compressor</a><br>[3] <a href="https://developers.google.com/closure/compiler/" target="_blank" rel="external">Google的Closure Compiler</a><br>[4] <a href="https://github.com/pandamicro/Javascript-Compressors-Analyse" target="_blank" rel="external">Javascript压缩混淆工具比较分析</a></p>
+<h3 id="平稳退化"><a href="#平稳退化" class="headerlink" title="平稳退化"></a>平稳退化</h3><p>如果正确地使用了js脚本，就可以让访问者在他们的浏览器不支持js或者禁用js的情况下，仍然能够顺利地访问你的网站，最基本的操作仍然能顺利实现（虽然有可能部分功能无法使用），这就是<em>平稳退化</em>。（Graceful Degradation，也叫做<em>优雅降级</em>）</p>
+<p>此处以<a href="https://www.google.com" target="_blank" rel="external">Google</a>网站为例，说明平稳退化。访问<a href="https://www.google.com" target="_blank" rel="external">Google</a>网站，若此时浏览器支持js，点击右上角的<em>Google应用</em>图标，则会弹出一个下拉框，下拉框中显示了各种Google应用；若浏览器禁用了js或者不支持js，点击右上角的<em>Google应用</em>图标，则会跳转至<a href="https://www.google.com/intl/zh-CN/about/products/" target="_blank" rel="external">Google Product</a>网页。</p>
+<p>上述功能，可以用下述代码实现。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;a href=<span class="string">"https://www.google.com/intl/zh-CN/about/products"</span> onclick=<span class="string">"myFunctionName(); return false"</span>&gt;Baidu&lt;<span class="regexp">/a&gt;</span></div></pre></td></tr></table></figure></p>
+<p>当浏览器支持js时，点击<code>&lt;a&gt;</code>标签，执行<code>myFunctionName()</code>函数（实现对应的效果，比如显示一个下拉框）；此时，由于<code>return false</code>的存在，会阻止<code>&lt;a&gt;</code>标签的默认行为，禁止跳转至新的界面。若浏览器不支持js，则点击 <code>&lt;a&gt;</code>标签，会执行<code>&lt;a&gt;</code>标签的默认行为，跳转至href指定的网址中。</p>
+<p>本章节参考资料：<br>[1] <a href="http://www.mamicode.com/info-detail-1454763.html" target="_blank" rel="external">JavaScrtip之平稳退化</a><br>[2] <a href="http://www.dongcoder.com/detail-137222.html" target="_blank" rel="external">渐进增强与平稳退化</a><br>[3] <a href="http://www.lai18.com/content/9777277.html" target="_blank" rel="external">javascript平稳退化</a></p>
+<h3 id="渐进增强"><a href="#渐进增强" class="headerlink" title="渐进增强"></a>渐进增强</h3><blockquote>
+<p>所谓的”渐进增强”就是使用一些额外的信息层去包裹原始数据。按照”渐进增强”原则创建出的网站几乎（如果不是“全部”的话）都会支持”平稳退化”。</p>
+</blockquote>
+<p>渐进增强原则基于这样一种思想：你应该总是从最核心的部分，也就是从内容开始。应该根据内容使用标记良好的结构；然后再逐步加强这些内容。这些增强工作可以是通过CSS改进呈现效果，也可以是通过DOM添加各种行为。如果你使用DOM添加内容核心，那么你添加的未免太迟了，内容应该在刚开始编写文档时就成为文档的组成部分。</p>
+<p>例如，<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span> Welcome,Shanghai! <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>上述代码中的<code>&lt;p&gt;</code>元素时页面中最核心的内容。下面考虑渐进增强，若页面支持CSS3，可以对其样式修饰。即使页面不支持CSS3，页面仍然能正常显示，符合“平稳退化”。<br>在判断文档中是否支持CSS或者js或者DOM行为等时，可以采用对象检测<code>(Object Detection)</code>（参见<em>5.4  向后兼容 </em>章节）。</p>
+<p>本章节参考资料：<br>[1]  <a href="http://www.imooc.com/article/9949" target="_blank" rel="external">什么是“平稳退化”和“渐进增强”理念？</a></p>
+<h3 id="向后兼容"><a href="#向后兼容" class="headerlink" title="向后兼容"></a>向后兼容</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(method)&#123;</div><div class="line">	statements;</div><div class="line">&#125;</div><div class="line"><span class="comment">//else&#123; &#125;</span></div></pre></td></tr></table></figure>
+<p>对象检测<code>(Object Detection)</code>的使用方式如上述代码所示。将某一个方法method打包在if语句中，若支持该方法，则执行相应的操作。</p>
+<p>这样编写代码，可以保证向后兼容。即若浏览器对js或DOM支持程度较高，支持某些的方法，则调用该方法。对于比较古老的浏览器，若不支持该方法，则执行else语句中的内容。从而保证了对新浏览器或新语法的支持，这就是<em>向后兼容</em>。</p>
+<p>向后兼容的实例如下所示。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(<span class="built_in">document</span>.getElementsByClassName)&#123;</div><div class="line">	<span class="keyword">var</span> content = <span class="built_in">document</span>.getElementsByClassName(<span class="string">"content"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>工程中更常用的做法为若不支持该方法，则返回false。使用<code>或</code>符号，可以同时检测多个方法。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(!method1 || !method2 || !method3) <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line"><span class="comment">//do something with these methods</span></div></pre></td></tr></table></figure></p>
+<p>或者<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> support = method1 &amp;&amp; method2 &amp;&amp; method2</div><div class="line"><span class="keyword">if</span>(!support) <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line"><span class="comment">//do something with these methods</span></div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag"># javascript</a>
+          
+            <a href="/tags/DOM/" rel="tag"># DOM</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/04/JavaScript中声明的提升/" rel="next" title="JavaScript中声明的提升">
+                <i class="fa fa-chevron-left"></i> JavaScript中声明的提升
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/02/21/JavaScript中的LHS和RHS/" rel="prev" title="JavaScript中的LHS和RHS">
+                JavaScript中的LHS和RHS <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/homepage/yymhk.png"
+               alt="Yin Zhehao" />
+          <p class="site-author-name" itemprop="name">Yin Zhehao</p>
+          <p class="site-description motion-element" itemprop="description">饮水思源 止于至善</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最佳实践"><span class="nav-number">2.</span> <span class="nav-text">最佳实践</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#web性能优化"><span class="nav-number">2.1.</span> <span class="nav-text">web性能优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#平稳退化"><span class="nav-number">2.2.</span> <span class="nav-text">平稳退化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#渐进增强"><span class="nav-number">2.3.</span> <span class="nav-text">渐进增强</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#向后兼容"><span class="nav-number">2.4.</span> <span class="nav-text">向后兼容</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yin Zhehao</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

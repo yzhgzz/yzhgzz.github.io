@@ -1,0 +1,959 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="javascript,DOM," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/homepage/favicon6.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="前言这篇博文主要记录了学习JavaScript过程中关于DOM的部分心得与总结。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript DOM学习笔记">
+<meta property="og:url" content="http://yinzhehao.top/2016/10/08/JavaScript DOM学习笔记/index.html">
+<meta property="og:site_name" content="Yinzhehao blog">
+<meta property="og:description" content="前言这篇博文主要记录了学习JavaScript过程中关于DOM的部分心得与总结。">
+<meta property="og:image" content="http://oda53d5ps.bkt.clouddn.com/tag.PNG">
+<meta property="og:image" content="http://oda53d5ps.bkt.clouddn.com/class2.PNG">
+<meta property="og:image" content="http://oda53d5ps.bkt.clouddn.com/class3.PNG">
+<meta property="og:image" content="http://oda53d5ps.bkt.clouddn.com/1.jpg">
+<meta property="og:updated_time" content="2017-02-27T09:42:44.802Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript DOM学习笔记">
+<meta name="twitter:description" content="前言这篇博文主要记录了学习JavaScript过程中关于DOM的部分心得与总结。">
+<meta name="twitter:image" content="http://oda53d5ps.bkt.clouddn.com/tag.PNG">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yinzhehao.top/2016/10/08/JavaScript DOM学习笔记/"/>
+
+
+
+
+
+  <title> JavaScript DOM学习笔记 | Yinzhehao blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Yinzhehao blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle">Try my best</p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yinzhehao.top/2016/10/08/JavaScript DOM学习笔记/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Yin Zhehao">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/homepage/yymhk.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Yinzhehao blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Yinzhehao blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                JavaScript DOM学习笔记
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-08T17:51:14+08:00">
+                2016-10-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Front-end/" itemprop="url" rel="index">
+                    <span itemprop="name">Front-end</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这篇博文主要记录了学习JavaScript过程中关于DOM的部分心得与总结。<br><a id="more"></a> </p>
+<h2 id="DOM学习总结"><a href="#DOM学习总结" class="headerlink" title="DOM学习总结"></a>DOM学习总结</h2><ul>
+<li>5个常用的DOM方法：<code>getElementById</code>,<code>getElementsByTagName</code>,<code>getElementsByClassName</code>,<code>getAttribute</code>和<code>setAttribute</code>。</li>
+<li><code>getElementById()</code>返回的是一个具有指定ID属性值的元素节点对应的对象，是一个单一对象，因此<code>getElementById</code>中元素<code>Element</code>为单数。</li>
+<li><code>getElementsByTagName()</code>和<code>getElementsByClassName()</code>方法返回的是对象数组，因此，<code>Elements</code>为复数。<h3 id="getElementByTagName-“-”"><a href="#getElementByTagName-“-”" class="headerlink" title="getElementByTagName(“*”)"></a>getElementByTagName(“*”)</h3></li>
+<li><p><code>getElementByTagName(&quot;*&quot;)</code>中使用<code>*</code>通配符，表示获取文档中的全部元素节点。通配符<code>*</code>必须放在用引号中，来和乘法符号区别。例如，要想知道文档中有多少个元素节点，可以使用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> length = <span class="built_in">document</span>.getElementByTagName(<span class="string">"*"</span>).length;</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>getElementByTagName(&quot;tag&quot;) 返回的是一个对象数组，具有数组的length属性，若采用</code>typeof<code>返回其类型，其结果为</code>object`。<br>若针对HTML文档</p>
+<figure class="highlight vbscript-html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;ul&gt;</div><div class="line">	&lt;li&gt; A &lt;/li&gt;</div><div class="line">	&lt;li&gt; B &lt;/li&gt;</div><div class="line">	&lt;li&gt; C &lt;/li&gt;</div><div class="line">&lt;/ul&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>其JS代码为<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> myArray = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"li"</span>);   <span class="comment">//[li,li,li]</span></div><div class="line"><span class="keyword">var</span> length = myArray.length;   <span class="comment">//3</span></div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;length;i++)&#123;</div><div class="line">	<span class="built_in">console</span>.log(myArray[i]);  </div><div class="line">	<span class="comment">// &lt;li&gt; A &lt;/li&gt; &lt;li&gt; B &lt;/li&gt; &lt;li&gt; C &lt;/li&gt;</span></div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(myArray);   <span class="comment">//[li,li,li]</span></div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> myArray);   <span class="comment">//object</span></div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> myArray[<span class="number">0</span>]);  <span class="comment">//object</span></div></pre></td></tr></table></figure></p>
+<p>则执行结果为<br><img src="http://oda53d5ps.bkt.clouddn.com/tag.PNG" alt="enter image description here"></p>
+<p>对于上述代码，即使只有一个<code>&lt;li&gt;</code>列表，返回的也是一个对象数组，是object对象，其length为1，其中每一个元素都是对象（这里只有一个元素）。</p>
+<h3 id="getElementByTagName-className1-className2"><a href="#getElementByTagName-className1-className2" class="headerlink" title="getElementByTagName(className1 className2)"></a>getElementByTagName(className1 className2)</h3><p><code>getElementByTagName(className1 className2)</code>中，若传入多个类名称，类名成之间以空格隔开，而不是逗号隔开。</p>
+<h3 id="getElementById-getElementsByTagName和getElementsByClassName的组合使用"><a href="#getElementById-getElementsByTagName和getElementsByClassName的组合使用" class="headerlink" title="getElementById, getElementsByTagName和getElementsByClassName的组合使用"></a>getElementById, getElementsByTagName和getElementsByClassName的组合使用</h3><p><code>getElementById</code>,<code>getElementsByTagName</code>和<code>getElementsByClassName</code>三者间可以组合使用，共同对元素节点进行选取。例如，获取id为demo且class为content的元素节点，其代码如下所示。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> demo = <span class="built_in">document</span>.getElementById(<span class="string">"demo"</span>);</div><div class="line"><span class="keyword">var</span> final = demo.getElementsByClassName(<span class="string">"content"</span>);</div></pre></td></tr></table></figure></p>
+<h3 id="getAttribute和setAttribute"><a href="#getAttribute和setAttribute" class="headerlink" title="getAttribute和setAttribute"></a>getAttribute和setAttribute</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//---</div><div class="line">&lt;div id="demo"&gt;Demo&lt;/demo&gt;</div><div class="line">//---</div><div class="line">var demo = document.getElementById("demo");</div><div class="line">console.log(demo);</div><div class="line">console.log(demo.getAttribute("id"));</div><div class="line">demo.setAttribute("id","test");</div><div class="line">console.log(demo.getAttribute("id"));</div></pre></td></tr></table></figure>
+<p>对于上述代码，使用<code>getAttribute()</code>可以获取元素的属性，使用<code>setAttribute()</code>可以对元素属性进行设置。</p>
+<p>通过<code>setAttribute()</code>方法对文档做出的修改，将使得文档在浏览器窗口里的显示效果和/或行为动作发生相应的变化，但在通过浏览器的<code>view source（查看源代码）</code>选项去查看文档的源代码时看到的仍将是原来的属性值——也就是说，<code>setAttribute()</code>方法做出的修改不会反映在文档本身的源代码里。这种“表里不一”的现象源自DOM的工作模式：<em>先加载文档的静态内容，再以动态方式对它们进行刷新，动态刷新不影响文档的静态内容</em>。这正是DOM的真正威力和诱人之处：<em>对页面内容的刷新不需要最终用户在他们的浏览器里执行页面刷新操作就可以实现</em>。</p>
+<blockquote>
+<p><code>setAttribute()</code>并不会修改文档的物理内容，而是改变DOM树。这是因为浏览器实际显示的是DOM树的内容，在浏览器看来，DOM节点树才是文档</p>
+</blockquote>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ul>
+<li><code>getElementById()</code>返回的是一个具有指定ID属性值的元素节点对应的对象，是一个单一对象，因此<code>getElementById</code>中元素<code>Element</code>为单数。</li>
+<li><code>getElementsByTagName()</code>和<code>getElementsByClassName()</code>方法返回的是对象数组，因此，<code>Elements</code>为复数。</li>
+</ul>
+<blockquote>
+<p><strong>getElementsByTagName()</strong><br>The getElementsByTagName() method returns a collection of an elements’s child elements with the specified tag name, as a NodeList object.</p>
+<p>The NodeList object represents a collection of nodes. The nodes can be accessed by index numbers. The index starts at 0.</p>
+<p>Tip: You can use the length property of the NodeList object to determine the number of child nodes with the specified tag name, then you can loop through all nodes and extract the info you want.</p>
+<p>Tip: The parametervalue “*” returns all of the element’s child elements.<br>— <a href="http://www.w3schools.com/jsref/met_element_getelementsbytagname.asp" target="_blank" rel="external">W3 School</a></p>
+</blockquote>
+<p>若HTML文档为<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"demo"</span> <span class="attr">id</span>=<span class="string">"demo"</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>考虑如下代码1<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// code 1</span></div><div class="line"><span class="keyword">var</span> demo = <span class="built_in">document</span>.getElementById(<span class="string">"demo"</span>);</div><div class="line">demo.setAttribute(<span class="string">"class"</span>, <span class="string">"democlass"</span>);</div></pre></td></tr></table></figure></p>
+<p>上述代码1可以成功地将<code>&lt;div&gt;</code>的class属性值设置为<code>democlass</code>。这是因为<code>getElementById()</code>返回的是一个具有指定ID属性值的元素节点对应的对象，是一个单一对象。此时，<code>demo</code>为<code>&lt;div class=&quot;demo&quot; id=&quot;demo&quot;&gt;Hello World&lt;/div&gt;</code>。</p>
+<p>若要用<code>getElementsByTagName()</code>和<code>getElementsByClassName()</code>方法实现上述同样的功能，需要避免如下错误，如下代码2所示。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// code 2</span></div><div class="line"><span class="keyword">var</span> demo = <span class="built_in">document</span>.getElementsByClassName(<span class="string">"demo"</span>);</div><div class="line"><span class="built_in">console</span>.log(demo);</div><div class="line">demo.setAttribute(<span class="string">"class"</span>, <span class="string">"democlass"</span>);</div></pre></td></tr></table></figure></p>
+<p>执行上述代码2，会出现如下错误。错误原因是因为<code>getElementsByClassName()</code>方法返回的是对象数组，而不是一个单一的对象，即使HTML中只有一个<code>class=&quot;demo&quot;</code>的元素。控制台输出demo结果为<code>[div#demo.demo, demo: div#demo.demo]</code>，如下图所示。demo是一个对象数组，demo[0]才是<code>&lt;div class=&quot;demo&quot; id=&quot;demo&quot;&gt;Hello World&lt;/div&gt;</code>。<br><img src="http://oda53d5ps.bkt.clouddn.com/class2.PNG" alt="enter image description here"></p>
+<p>对于上述代码，进行如下修改，则可以正常修改<code>&lt;div&gt;</code>的class名。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// code 2</span></div><div class="line"><span class="keyword">var</span> demo0 = <span class="built_in">document</span>.getElementsByClassName(<span class="string">"demo"</span>)[<span class="number">0</span>];</div><div class="line"><span class="built_in">console</span>.log(demo0);</div><div class="line">demo0.setAttribute(<span class="string">"class"</span>, <span class="string">"democlass"</span>);</div></pre></td></tr></table></figure></p>
+<p>上述代码运行结果为<br><img src="http://oda53d5ps.bkt.clouddn.com/class3.PNG" alt="enter image description here"></p>
+<p>类似地，若采用<code>getElementsByTagName()</code>实现上述功能，仍然要注意该方法返回的是一个对象数组，而不是一个对象。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// code 3</span></div><div class="line"><span class="keyword">var</span> demo = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"demo"</span>);  <span class="comment">//对象数组</span></div><div class="line"><span class="keyword">var</span> demo0 = demo[<span class="number">0</span>];   <span class="comment">//一个对象</span></div><div class="line">demo0.setAttribute(<span class="string">"class"</span>, <span class="string">"democlass"</span>);  <span class="comment">//正常</span></div><div class="line">demo.setAttribute(<span class="string">"class"</span>, <span class="string">"democlass"</span>);  <span class="comment">//TypeError</span></div></pre></td></tr></table></figure></p>
+<h3 id="改变元素属性的DOM解决方案和非DOM解决方案"><a href="#改变元素属性的DOM解决方案和非DOM解决方案" class="headerlink" title="改变元素属性的DOM解决方案和非DOM解决方案"></a>改变元素属性的DOM解决方案和非DOM解决方案</h3><p>以改变<code>&lt;img&gt;</code>标签的<code>src</code>属性为例，提供DOM解决方案和非DOM解决方案。（下例代码中<code>whicpic</code>为点击的<code>&lt;a&gt;</code>标签，将<code>&lt;a&gt;</code>标签的href属性值传递给<code>&lt;img&gt;</code>标签的<code>src</code>属性）<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//DOM 解决方案</span></div><div class="line"><span class="keyword">var</span> source = whichpic.getAttribute(<span class="string">"href"</span>);<span class="comment">//获取a标签的href属性</span></div><div class="line">  <span class="keyword">var</span> placeholder = <span class="built_in">document</span>.getElementById(<span class="string">"placeholder"</span>); <span class="comment">//获取img对象</span></div><div class="line">  placeholder.setAttribute(<span class="string">"src"</span>,source); <span class="comment">//属性设置</span></div></pre></td></tr></table></figure></p>
+<p>DOM解决方案中，通过<code>getAttribute</code>和<code>setAttribute</code>来进行属性的设置。而非DOM方案中，直接对属性值进行设置即可。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">placeholder.src = source;</div></pre></td></tr></table></figure></p>
+<p>个人更推荐DOM解决方案，因为DOM方案的调用格式都相同，非DOM方案中每种属性值设置方法不一样，需要去识记。此外，DOM方案对于任何一种标记语言都适用，而非DOM方案则不具有普适性。</p>
+<p>###3.7 标签中阻止点击默认行为的发生<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">li</span>&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"images/fireworks.jpg"</span> <span class="attr">title</span>=<span class="string">"A fireworks display"</span> <span class="attr">onclick</span>=<span class="string">"showPic(this); return false;"</span>&gt;</span>Fireworks<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">    </div><div class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"images/coffee.jpg"</span> <span class="attr">title</span>=<span class="string">"A cup of black coffee"</span> <span class="attr">onclick</span>=<span class="string">"showPic(this); return false;"</span>&gt;</span>Coffee<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>对于上述代码，点击对应的<code>&lt;a&gt;</code>标签，会调用对应的事件处理函数<code>showPic(this)</code>。如果不加上<code>return false</code>或者<code>return true</code>，则会执行<code>&lt;a&gt;</code>标签被点击后的默认行为（此处为在一个新的窗口中显示图片）。为了阻止默认行为的发生，可以对<code>onclick</code>事件给出一个返回值：<code>return true</code>表示这个链接已经被点击了，则会执行默认的行为；<code>return false</code>表示这个链接没有被点击，则不会触发默认的行为。</p>
+<p>###3.8 其他</p>
+<ul>
+<li>childNodes<br>在一棵节点树上，<code>childNodes</code>属性可以用来获取任何一个元素的所有子元素，它是一个包含这个元素全部子元素的数组。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">element.childNodes</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>例如，获取body元素的全部子元素，其方法为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var body_elemengt = document.getElementsByTagName(&quot;body&quot;)[0];  //[0] 不要忘记</div><div class="line">body_element.childNodes;   //子元素</div><div class="line">body_element.childNodes.length;  //返回子元素个数</div></pre></td></tr></table></figure></p>
+<ul>
+<li>nodeType<br><code>node.nodeType</code>可以获取节点的节点属性，其返回值是一个数字，共12种取值，最常用的返回值有3种。<br>（1）元素节点的nodeType属性值 = 1<br>（2）属性节点的nodeType属性值 = 2<br>（3）文本节点的nodeType属性值 = 3</li>
+</ul>
+<p>例如，对于<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">title</span>=<span class="string">"a gentle reminder"</span>&gt;</span> Don't forget to buy this stuff.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>，其元素节点为p，其属性节点为<code>title=&quot;a gentle reminder&quot;</code>，其文本节点为<code>Don&#39;t forget to buy this stuff.</code>。<br><img src="http://oda53d5ps.bkt.clouddn.com/1.jpg" alt="enter image description here"></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"></div><div class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"demo"</span> <span class="attr">id</span>=<span class="string">"demo"</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">			<span class="built_in">console</span>.log(<span class="built_in">document</span>.getElementsByTagName(<span class="string">"body"</span>)[<span class="number">0</span>].childNodes.length);</div><div class="line">		<span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>执行上述代码，控制台输出body的子元素个数为4：1个元素节点div，1个属性节点(<em>id和class属性值算作一个节点</em>)，1个文本节点，1个元素节点<code>&lt;script&gt;</code>。即<code>element.childNodes.length</code>会统计所有种类的节点个数，而不仅仅是元素节点个数。若想统计元素节点个数，可以根据nodeType值进行判断。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> myChildNodes = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"body"</span>)[<span class="number">0</span>].childNodes;</div><div class="line"><span class="keyword">var</span> length = myChildNodes.length;</div><div class="line"><span class="keyword">var</span> count = <span class="number">0</span>;</div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;length;i++)&#123;</div><div class="line">	<span class="keyword">if</span>(myChildNodes[i].nodeType == <span class="number">1</span>) &#123;</div><div class="line">		count++;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(count);  <span class="comment">//2  1个元素节点div 1个元素节点`&lt;script&gt;`</span></div></pre></td></tr></table></figure></p>
+<ul>
+<li>nodeValue<blockquote>
+<p>The nodeValue property sets or returns the node value of the specified node. If the node is an element node, the nodeValue property will return null.<br><strong>Note</strong>: If you want to return the text of an element, remember that text is always inside a Text node, and you will have to return the Text node’s node value (element.childNodes[0].nodeValue). — <a href="http://www.w3schools.com/jsref/prop_node_nodevalue.asp" target="_blank" rel="external">W3 School HTML DOM nodeValue Property</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;p id=&quot;description&quot;&gt;Choose an image&lt;/p&gt;</div></pre></td></tr></table></figure>
+</blockquote>
+</li>
+</ul>
+<p>对于上述节点，执行如下代码。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> description = <span class="built_in">document</span>.getElementById(<span class="string">"description"</span>);</div><div class="line">alert(description.nodeValue);  <span class="comment">//null</span></div><div class="line">alert(description.childNodes[<span class="number">0</span>].nodeValue);  <span class="comment">//Choose an image</span></div></pre></td></tr></table></figure></p>
+<p><strong>元素节点的nodeValue值是null。</strong>因此，<code>description.nodeValue</code>的值为null。若要返回元素节点中的文本，需要执行<code>element.childNodes[0].nodeValue</code>语句。</p>
+<ul>
+<li><p>firstChild， lastChild</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">element.childNodes[0] = element.firstChild;</div><div class="line">element.childNodes[element.childNodes.length-1] = element.lastChild;</div></pre></td></tr></table></figure>
+</li>
+<li><p>nodeName<br>Go to <a href="http://www.w3schools.com/jsref/prop_node_nodename.asp" target="_blank" rel="external">W3 School website</a> for more information.</p>
+</li>
+</ul>
+<p><code>nodeName</code>可以返回节点的名称，注意返回的字符串都是大写的。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">document</span>.getElementsByTagName(<span class="string">"div"</span>).nodeName == <span class="string">"div"</span>;     <span class="comment">//false</span></div><div class="line"><span class="built_in">document</span>.getElementsByTagName(<span class="string">"div"</span>).nodeName == <span class="string">"DIV"</span>;     <span class="comment">//true</span></div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag"># javascript</a>
+          
+            <a href="/tags/DOM/" rel="tag"># DOM</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/27/学校网页实例练习总结/" rel="next" title="学校网页实例练习总结">
+                <i class="fa fa-chevron-left"></i> 学校网页实例练习总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/11/前端数据可视化开源库介绍/" rel="prev" title="前端数据可视化开源库介绍">
+                前端数据可视化开源库介绍 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/homepage/yymhk.png"
+               alt="Yin Zhehao" />
+          <p class="site-author-name" itemprop="name">Yin Zhehao</p>
+          <p class="site-description motion-element" itemprop="description">饮水思源 止于至善</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DOM学习总结"><span class="nav-number">2.</span> <span class="nav-text">DOM学习总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#getElementByTagName-“-”"><span class="nav-number">2.1.</span> <span class="nav-text">getElementByTagName(“*”)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getElementByTagName-className1-className2"><span class="nav-number">2.2.</span> <span class="nav-text">getElementByTagName(className1 className2)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getElementById-getElementsByTagName和getElementsByClassName的组合使用"><span class="nav-number">2.3.</span> <span class="nav-text">getElementById, getElementsByTagName和getElementsByClassName的组合使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getAttribute和setAttribute"><span class="nav-number">2.4.</span> <span class="nav-text">getAttribute和setAttribute</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意事项"><span class="nav-number">2.5.</span> <span class="nav-text">注意事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#改变元素属性的DOM解决方案和非DOM解决方案"><span class="nav-number">2.6.</span> <span class="nav-text">改变元素属性的DOM解决方案和非DOM解决方案</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yin Zhehao</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

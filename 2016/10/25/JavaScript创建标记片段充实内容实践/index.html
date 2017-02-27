@@ -1,0 +1,928 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="javascript,DOM," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/homepage/favicon6.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="前言本文主要记录了运用JavaScript创建标记片段来充实文档内容的一些实践和注意事项。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript创建标记片段充实内容实践">
+<meta property="og:url" content="http://yinzhehao.top/2016/10/25/JavaScript创建标记片段充实内容实践/index.html">
+<meta property="og:site_name" content="Yinzhehao blog">
+<meta property="og:description" content="前言本文主要记录了运用JavaScript创建标记片段来充实文档内容的一些实践和注意事项。">
+<meta property="og:image" content="http://oda53d5ps.bkt.clouddn.com/lastChild.PNG">
+<meta property="og:image" content="http://oda53d5ps.bkt.clouddn.com/lastElementChild.PNG">
+<meta property="og:updated_time" content="2017-02-27T09:42:58.466Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript创建标记片段充实内容实践">
+<meta name="twitter:description" content="前言本文主要记录了运用JavaScript创建标记片段来充实文档内容的一些实践和注意事项。">
+<meta name="twitter:image" content="http://oda53d5ps.bkt.clouddn.com/lastChild.PNG">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yinzhehao.top/2016/10/25/JavaScript创建标记片段充实内容实践/"/>
+
+
+
+
+
+  <title> JavaScript创建标记片段充实内容实践 | Yinzhehao blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Yinzhehao blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle">Try my best</p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yinzhehao.top/2016/10/25/JavaScript创建标记片段充实内容实践/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Yin Zhehao">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/homepage/yymhk.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Yinzhehao blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Yinzhehao blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                JavaScript创建标记片段充实内容实践
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-25T17:51:14+08:00">
+                2016-10-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Front-end/" itemprop="url" rel="index">
+                    <span itemprop="name">Front-end</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文主要记录了运用JavaScript创建标记片段来充实文档内容的一些实践和注意事项。<br><a id="more"></a> </p>
+<h2 id="充实文档内容"><a href="#充实文档内容" class="headerlink" title="充实文档内容"></a>充实文档内容</h2><h3 id="8-1-HTML，XHTML和HTML5"><a href="#8-1-HTML，XHTML和HTML5" class="headerlink" title="8.1 HTML，XHTML和HTML5"></a>8.1 HTML，XHTML和HTML5</h3><p>对于标记而言，无论选用 HTML，XHTML，还是HTML5，都必须和DOCTYPE声明保持一致。</p>
+<p>XHTML对标记有着更严格地要求，这样可以督促我们写出更严清晰的文档。而HTML对标签和属性的要求则没有这么严格，例如，HTML中既允许使用大写字母（如<code>&lt;DIV&gt;</code>）,也允许使用小写字母（如<code>&lt;div&gt;</code>）。</p>
+<p>推荐使用XHTML，其优点包括</p>
+<ul>
+<li>XHTML中要求所有的标签名和属性名必须使用小写字母。</li>
+<li>XHTML中所有标签都必须闭合——对诸如<code>&lt;img&gt;</code>和 <code>&lt;br&gt;</code>标签也不例外。而HTML中允许部分标签省略结束标签——比如可以省略<code>&lt;/p&gt;</code>和<code>&lt;/li&gt;</code>标签等。<strong>为了与早期的浏览器保持兼容，应该在反斜杠字符的前面保留一个空格，例如<code>&lt;br /&gt;</code>。</strong><blockquote>
+<p>In HTML, the <code>&lt;br&gt;</code> tag has no end tag.<br>In XHTML, the<code>&lt;br&gt;</code> tag must be properly closed, like this: <code>&lt;br/&gt;</code>.</p>
+</blockquote>
+</li>
+</ul>
+<p>若使用XHTML，则其DOCTYPE的写法为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Strict//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;&gt;</div></pre></td></tr></table></figure></p>
+<p>若采用HTML5方案，则只需书写<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div></pre></td></tr></table></figure></p>
+<p>即可，该声明同样支持HTML和XHTML。</p>
+<h3 id="8-2-快捷键设置"><a href="#8-2-快捷键设置" class="headerlink" title="8.2 快捷键设置"></a>8.2 快捷键设置</h3><p>HTML中，<code>accesskey</code>属性可以把一个元素（如链接）与键盘上的某个特定的按键关联在一起，起到键盘快捷方式的作用。</p>
+<p>一般来说，windows系统的浏览器中，快捷键的用法是<code>Alt</code> + 特定按键。Mac系统的浏览器里，快捷键的用法是<code>Ctrl</code> + 特定按键。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://liubaoshuai.top"</span> <span class="attr">accesskey</span>=<span class="string">"1"</span>&gt;</span>My Blog<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>上述代码中，对链接绑定了快捷键。在浏览器访问中，windows下只需按下<code>Alt</code> + <code>1</code>，就可访问该链接。</p>
+<p>###8.3 lastChild  V.S. lastElementChild</p>
+<blockquote>
+<p>The <code>lastChild</code> property returns the last child node of the specified node, as a Node object. The returned node object may be an element node, a text node or a comment node. </p>
+<p>The <code>lastElementChild</code> property returns the last child element of the specified element. The returned node object should be an element node, ignores a text node and a comment node.</p>
+<p>The difference between <code>lastChild</code> and <code>lastElementChild</code>, is that <code>lastChild returns</code> the last child node as an element node, a text node or a comment node (depending on which one’s last), while <code>lastElementChild</code> returns the last child node as an element node (ignores text and comment nodes).   — <a href="http://www.w3schools.com/jsref/prop_element_lastelementchild.asp" target="_blank" rel="external">W3 School</a></p>
+<p>Note: <em>Whitespace</em> and <em>line breaks</em> inside elements is considered as text, and text is considered as nodes。（空格和换行符会被当做文本节点，在使用<code>lastChild</code>时，可能会将空格和换行符当做文本节点返回。）</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">p</span>&gt;</span>Example list:<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"myList"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">li</span>&gt;</span>Coffee<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">li</span>&gt;</span>Tea<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">p</span>&gt;</span>Click the button to get the HTML content of the list's last child node.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">"myFunction()"</span>&gt;</span>Try it<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">strong</span>&gt;</span>Note:<span class="tag">&lt;/<span class="name">strong</span>&gt;</span> Whitespace inside elements is considered as text, and text is considered as nodes.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">p</span>&gt;</span>If you add whitespace before the closing UL element, the result will be "undefined".<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"demo"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">	</div><div class="line">	<span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">		<span class="function"><span class="keyword">function</span> <span class="title">myFunction</span>(<span class="params"></span>) </span>&#123;</div><div class="line">		    <span class="keyword">var</span> list = <span class="built_in">document</span>.getElementById(<span class="string">"myList"</span>).lastChild.innerHTML;</div><div class="line">		    <span class="built_in">document</span>.getElementById(<span class="string">"demo"</span>).innerHTML = list;</div><div class="line">		&#125;</div><div class="line">	<span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>上述代码中，将获取<code>&lt;ul&gt;</code>列表中的最后一个元素，然后将其显示出来。由于代码中<code>&lt;/li&gt;</code>和<code>&lt;/ul&gt;</code>之间有一个换行符，因此，<code>lastChild</code>返回的是该换行符，故最终结果会显示<code>undefined</code>。解决方案：</p>
+<ul>
+<li>方法1：将<code>lastChild</code>替换为<code>lastElementChild</code></li>
+<li>方法2：去掉<code>&lt;/li&gt;</code>和<code>&lt;/ul&gt;</code>之间的换行符或空格，采用如下代码格式。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;ul id=&quot;myList&quot;&gt;&lt;li&gt;Coffee&lt;/li&gt;&lt;li&gt;Tea&lt;/li&gt;&lt;/ul&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>综上案例，在使用<code>lastChild</code>和<code>lastElementChild</code>时，一定要注意返回节点的类型，注意二者之间的区别。下面是一个来自<a href="http://stackoverflow.com/questions/30262056/js-remove-lastchild-only-works-every-second-button-click/30262574#30262574" target="_blank" rel="external">StackOverflow</a> 的代码实例，编写者本意是每次点击按钮，将删除一个列表元素。但是由于采用<code>lastChild</code>时，换行符会被当做文本节点返回。因此，在第一次点击时候，只会删除换行符。在第2次，第3次……点击按钮时，才会正常删除列表元素。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"list"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>List item 1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>List item 2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>List item 3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">id</span>=<span class="string">"child"</span>&gt;</span>List item 4<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>List item 5<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"Delete last"</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">document</span>.getElementsByTagName(<span class="string">'input'</span>)[<span class="number">0</span>].onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line"><span class="meta">    'use strict'</span>;</div><div class="line">    <span class="keyword">var</span> list = <span class="built_in">document</span>.getElementById(<span class="string">'list'</span>), item = list.lastChild;</div><div class="line">    list.removeChild(item);</div><div class="line">    <span class="built_in">window</span>.alert(<span class="string">"Removed"</span>);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>主要参考资料：<br>[1] <a href="http://stackoverflow.com/questions/30262056/js-remove-lastchild-only-works-every-second-button-click/30262574#30262574" target="_blank" rel="external">StackOverflow</a><br>[2] <a href="https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/lastElementChild" target="_blank" rel="external">MDN</a><br>[3] <a href="http://www.w3schools.com/jsref/prop_element_lastelementchild.asp" target="_blank" rel="external">W3 School</a></p>
+<p>几乎所有的浏览器都支持<code>lastChild</code>属性，但是一些高版本浏览器才支持<code>lastElementChild</code>属性。<br><img src="http://oda53d5ps.bkt.clouddn.com/lastChild.PNG" alt="lastChild"><br><img src="http://oda53d5ps.bkt.clouddn.com/lastElementChild.PNG" alt="lastElementChild"></p>
+<p>Accroding to the above figure, this <code>lastElementChild</code> property is unsupported prior to IE9, so the following snippet can be used to add support to IE8:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">// Source: https://github.com/Alhadis/Snippets/blob/master/js/polyfills/IE8-child-elements.js</div><div class="line">if(!(&quot;lastElementChild&quot; in document.documentElement))&#123;</div><div class="line">    Object.defineProperty(Element.prototype, &quot;lastElementChild&quot;, &#123;</div><div class="line">        get: function()&#123;</div><div class="line">            for(var nodes = this.children, n, i = nodes.length - 1; i &gt;= 0; --i)</div><div class="line">                if(n = nodes[i], 1 === n.nodeType) return n;</div><div class="line">            return null;</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>上述代码来自<a href="https://github.com/Alhadis/Snippets/blob/master/js/polyfills/IE8-child-elements.js" target="_blank" rel="external">Github</a>。</p>
+<p>也可以采用如下的方法，来实现<code>lastElementChild</code>的效果：在<code>getElementsByTagName()</code>中使用通配符<code>*</code>获取一个包含所有元素节点的数组（获取的是元素节点，不包括文本节点或者注释节点），然后输出改数组的最后一个元素。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Example list:<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"myList"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">li</span>&gt;</span>Coffee<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">li</span>&gt;</span>Tea<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">p</span>&gt;</span>Click the button to get the HTML content of the list's last child node.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">"myNewFunction()"</span>&gt;</span>Try it<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">strong</span>&gt;</span>Note:<span class="tag">&lt;/<span class="name">strong</span>&gt;</span> Whitespace inside elements is considered as text, and text is considered as nodes.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">p</span>&gt;</span>If you add whitespace before the closing UL element, the result will be "undefined".<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"demo"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">myNewFunction</span>(<span class="params"></span>) </span>&#123;</div><div class="line">		    <span class="keyword">var</span> list = <span class="built_in">document</span>.getElementById(<span class="string">"myList"</span>);</div><div class="line">		    <span class="keyword">var</span> childAllNodes = list.getElementsByTagName(<span class="string">"*"</span>);</div><div class="line">		    <span class="built_in">console</span>.log(childAllNodes[childAllNodes.length<span class="number">-1</span>].nodeName);  <span class="comment">//LI</span></div><div class="line">		    <span class="built_in">console</span>.log(childAllNodes[childAllNodes.length<span class="number">-1</span>].nodeType);   <span class="comment">//1</span></div><div class="line">		    <span class="built_in">console</span>.log(childAllNodes[childAllNodes.length<span class="number">-1</span>].innerHTML); <span class="comment">//Tea</span></div><div class="line">		    <span class="built_in">console</span>.log(childAllNodes[childAllNodes.length<span class="number">-1</span>].childNodes[<span class="number">0</span>].nodeValue);  <span class="comment">//Tea</span></div><div class="line">		&#125;</div></pre></td></tr></table></figure>
+<p>需要注意的是：</p>
+<ul>
+<li><code>parentNode.getElementsByTagName(*)</code>获取的是一个包含所有元素节点的数组（获取的是元素节点，不包括文本节点或者注释节点）</li>
+<li><code>nodeName</code>返回的节点名称都是大写，如LI，DIV等</li>
+<li><strong>元素节点的nodeValue值是null。</strong>因此，<code>description.nodeValue</code>的值为null。若要返回元素节点中的文本，需要执行<code>element.childNodes[0].nodeValue</code>语句。</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag"># javascript</a>
+          
+            <a href="/tags/DOM/" rel="tag"># DOM</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/20/Web页面加载速度优化实战/" rel="next" title="Web页面加载速度优化实战">
+                <i class="fa fa-chevron-left"></i> Web页面加载速度优化实战
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/04/JavaScript中的闭包与this/" rel="prev" title="JavaScript中的闭包与this">
+                JavaScript中的闭包与this <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/homepage/yymhk.png"
+               alt="Yin Zhehao" />
+          <p class="site-author-name" itemprop="name">Yin Zhehao</p>
+          <p class="site-description motion-element" itemprop="description">饮水思源 止于至善</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#充实文档内容"><span class="nav-number">2.</span> <span class="nav-text">充实文档内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1-HTML，XHTML和HTML5"><span class="nav-number">2.1.</span> <span class="nav-text">8.1 HTML，XHTML和HTML5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2-快捷键设置"><span class="nav-number">2.2.</span> <span class="nav-text">8.2 快捷键设置</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yin Zhehao</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
