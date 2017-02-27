@@ -1,0 +1,938 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="html,css,javascript,AngularJS,demo," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/homepage/favicon6.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="前言本篇博文主要记录和总结了我在练习制作基于AngularJS的抽奖系统demo过程中的一些心得和技巧。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于AngularJS的抽奖系统练习总结">
+<meta property="og:url" content="http://yinzhehao.top/2016/01/19/基于AngularJS的抽奖系统练习总结/index.html">
+<meta property="og:site_name" content="Yinzhehao blog">
+<meta property="og:description" content="前言本篇博文主要记录和总结了我在练习制作基于AngularJS的抽奖系统demo过程中的一些心得和技巧。">
+<meta property="og:updated_time" content="2017-02-27T06:18:15.739Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于AngularJS的抽奖系统练习总结">
+<meta name="twitter:description" content="前言本篇博文主要记录和总结了我在练习制作基于AngularJS的抽奖系统demo过程中的一些心得和技巧。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yinzhehao.top/2016/01/19/基于AngularJS的抽奖系统练习总结/"/>
+
+
+
+
+
+  <title> 基于AngularJS的抽奖系统练习总结 | Yinzhehao blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Yinzhehao blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle">Try my best</p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yinzhehao.top/2016/01/19/基于AngularJS的抽奖系统练习总结/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Yin Zhehao">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/homepage/yymhk.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Yinzhehao blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Yinzhehao blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                基于AngularJS的抽奖系统练习总结
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-01-19T17:51:14+08:00">
+                2016-01-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Front-end/" itemprop="url" rel="index">
+                    <span itemprop="name">Front-end</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本篇博文主要记录和总结了我在练习制作基于AngularJS的抽奖系统demo过程中的一些心得和技巧。<br><a id="more"></a><br>抽奖系统应用很广泛，基于AngularJS的抽奖系统具有代码清晰简洁，较高的执行效率和较强的扩展性等优势。这个抽奖系统主要包括以下一些效果及功能：</p>
+<ul>
+<li>可以点击开始按钮进行抽奖</li>
+<li>抽奖过程具有闪烁效果，在所有奖品上循环一定次数之后自动随机选择出中奖奖品，并显示在页面上。</li>
+<li>结束抽奖之后，可以选择重新开始抽奖，还可以选择对奖品进行修改，包括对已有商品的删除和增加奖品等。</li>
+</ul>
+<h2 id="心得与技巧"><a href="#心得与技巧" class="headerlink" title="心得与技巧"></a>心得与技巧</h2><h3 id="整体设计思路"><a href="#整体设计思路" class="headerlink" title="整体设计思路"></a>整体设计思路</h3><p>基于AngularJS框架，只需一个单页即可完成所需功能与要求。主要分为四个页面元素：</p>
+<ul>
+<li>抽奖开始的初始化页面元素</li>
+<li>抽奖过程中闪烁选择的页面元素</li>
+<li>抽中奖品时显示奖品的页面元素</li>
+<li>增加或删除奖品的页面元素</li>
+</ul>
+<p>而这四个页面元素的切换可以通过放在不同的div容器中，然后通过控制容器的隐藏和显示来切换相应的页面元素。在这四个页面元素中，再分别初始化控制器数据，定义抽奖、中奖和修改奖品的方法等。值得一提的是，抽奖时奖品元素动态闪烁可以利用<code>$timeout</code>对象的注入来实现，而奖品信息也可以通过<code>JSON</code>格式来进行储存。</p>
+<h3 id="视图层的实现分析"><a href="#视图层的实现分析" class="headerlink" title="视图层的实现分析"></a>视图层的实现分析</h3><p>首先，在html标签上通过<code>ng-app</code>属性绑定页面模板名称，用于告诉 AngularJS 应用当前这个元素是根元素：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">ng-app</span>=<span class="string">"lottery"</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>然后要记得用script标签引入angularjs的js文件：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"lib/angular.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>在body元素里，需要通过<code>ng-controller</code>属性定义控制器的作用域：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"lottery"</span> <span class="attr">ng-controller</span>=<span class="string">"ctrl_lottery"</span>&gt;</span></div><div class="line">......</div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>这里我们将整个div中都定义为这个控制器的作用域，在这个作用域中，我们可以定义需要用到的元素变量，绑定数据和方法等。</p>
+<p>之后主要分为四个大的div元素，和前面分析的一样，代表四种页面效果。这里设置每个div的名称时有个小技巧，即设置为”step1”、”step2”、”step3”、”step4”，这样后面在控制页面元素的时候，获取id的字符串，进行切换等操作都会相对比较方便。</p>
+<p>第一个页面元素中主要是一个开始按钮，并用<code>ng-click</code>方式绑定了对应的方法：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">ng-click</span>=<span class="string">"start()"</span>&gt;</span>开始<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>第二个页面元素主要是调用<code>ng-repeat</code>指令，这个指令可以用来遍历数组。同时用双大括号绑定了奖品的名称。这里最重要的是闪烁样式的确定，利用<code>ng-class</code>指令可以进行动态控制：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-repeat</span>=<span class="string">"item in items"</span></span></div><div class="line">		     <span class="attr">id</span>=<span class="string">"&#123;&#123;item.id&#125;&#125;"</span> <span class="attr">class</span>=<span class="string">"item"</span></div><div class="line">				 <span class="attr">ng-class</span>=<span class="string">"&#123;'active':item.status&#125;"</span>&gt;</div><div class="line">			&#123;&#123;item.name&#125;&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>这里添加元素样式的方法是采用定义<strong>key/value</strong>的方式，即当“item.status”的值为true的时候，将”active”样式添加上去，反之则不添加，这样就可以实现闪烁样式的添加与删除了。</p>
+<p>第三个页面元素主要是“重新开始”和“修改奖品”两个选择a元素的添加，同时用<code>ng-click</code>绑定对应的方法即可：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:void(0);"</span></span></div><div class="line">			 <span class="attr">ng-click</span>=<span class="string">"reset()"</span></div><div class="line">		   <span class="attr">class</span>=<span class="string">"reset"</span>&gt;</div><div class="line">			<span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"images/reset.png"</span>&gt;</span>重新开始</div><div class="line"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">......</div></pre></td></tr></table></figure>
+<p>这里值得注意的是，<code>href=&quot;javascript:void(0);&quot;</code>代表当触发a元素的时候，去执行相应绑定的js函数而不是去跳转地址。</p>
+<p>第四个元素页面，主要是关于奖品的修改，除了和前面类似的一个返回按钮的设置之外，主要是增加和删除奖品两个部分的实现。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">ng-submit</span>=<span class="string">"add()"</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">class</span>=<span class="string">"add"</span> <span class="attr">ng-model</span>=<span class="string">"name"</span> <span class="attr">required</span> <span class="attr">placeholder</span>=<span class="string">"名称"</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">class</span>=<span class="string">"btn"</span> <span class="attr">value</span>=<span class="string">"添加"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>用<code>ng-submit</code>指令绑定对应方法，当<code>type</code>属性为<code>submit</code>的按钮被点击时，就会触发这个方法。<code>ng-model</code>指令将输入框中的输入值和<code>name</code>变量进行了双向绑定。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">li</span> <span class="attr">ng-repeat</span>=<span class="string">"item in items"</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;&#123;item.id&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"span"</span>&gt;</span>&#123;&#123;item.name&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:void(0);"</span> <span class="attr">ng-click</span>=<span class="string">"del(item.id)"</span>&gt;</span>删除<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>而关于删除奖品这部分，先用<code>ng-repeat</code>指令循环遍历把奖品的信息和删除键都陈列出来，然后在删除键那里用<code>ng-click</code>绑定控制器中删除的方法即可。</p>
+<h3 id="js控制代码分析"><a href="#js控制代码分析" class="headerlink" title="js控制代码分析"></a>js控制代码分析</h3><p>首先还是angularjs控制器的正常代码定义格式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">angular.module(<span class="string">"lottery"</span>, [])</div><div class="line">	.controller(<span class="string">'ctrl_lottery'</span>, [<span class="string">'$scope'</span>, <span class="string">'$timeout'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope, $timeout</span>) </span>&#123;</div><div class="line">	......</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<p>其中<code>angular.module</code>定义了 angular模块，是angularjs的代码入口，其中的名称就是前面页面中用<code>ng-app</code>绑定的名称。然后定义了控制器，控制器名称也与前面页面代码中绑定的名称一致，并注入需要用到的<code>$scope</code>和<code>$timeout</code>对象。</p>
+<h4 id="初始化方法"><a href="#初始化方法" class="headerlink" title="初始化方法"></a>初始化方法</h4><p>用items来保存包含所有奖品的对象数组，然后定义两个通用的方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$scope.$$ = <span class="function"><span class="keyword">function</span>(<span class="params">id</span>) </span>&#123;</div><div class="line">			<span class="keyword">return</span> <span class="built_in">document</span>.getElementById(id);</div><div class="line">		&#125;;</div><div class="line">$scope.showhide = <span class="function"><span class="keyword">function</span>(<span class="params">pre, nex</span>) </span>&#123;</div><div class="line">		pre = <span class="string">"step"</span> + pre;</div><div class="line">		nex = <span class="string">"step"</span> + nex;</div><div class="line">		$scope.$$(pre).style.display = <span class="string">"none"</span>;</div><div class="line">		$scope.$$(nex).style.display = <span class="string">"block"</span>;</div><div class="line">		&#125;;</div></pre></td></tr></table></figure>
+<p>第一个方法根据元素id号来返回元素对象，第二个方法是切换页面元素的方法，只需传入对应的数字，即可完成页面切换，通过让前面一个页面隐藏和后面一个页面显示来达到效果，从这里也可以看出前面设置id的小技巧的用处了。</p>
+<h4 id="抽奖方法"><a href="#抽奖方法" class="headerlink" title="抽奖方法"></a>抽奖方法</h4><p>首先调用showhide()方法切换页面，然后定义循环圈数，其中最后选定第几号产品将随机产生：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> selkey = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * $scope.items.length);</div></pre></td></tr></table></figure>
+<p>方法<code>Math.random()</code>随机产生一个大于等于0小于1的数字，然后乘以总个数之后再利用<code>Math.floor</code>方法进行向下取整，可以得到对应奖品的随机数字。</p>
+<p>定义<code>next()</code>方法实现选中下一个进行闪烁，去掉上一个闪烁样式的效果：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> next = <span class="function"><span class="keyword">function</span>(<span class="params">key</span>) </span>&#123;</div><div class="line">				$scope.items[key].status = <span class="literal">true</span>;</div><div class="line">				<span class="keyword">if</span>((key - <span class="number">1</span>) &gt;= <span class="number">0</span>) &#123;</div><div class="line">					$scope.items[key <span class="number">-1</span>].status = <span class="literal">false</span>;</div><div class="line">				&#125;</div><div class="line">				<span class="keyword">if</span>(key == <span class="number">0</span>) &#123;</div><div class="line">					$scope.items[$scope.items.length - <span class="number">1</span>].status = <span class="literal">false</span>;</div><div class="line">				&#125;</div></pre></td></tr></table></figure>
+<p>具体通过对status标志的布尔值改变来实现。这里注意一旦超过一圈需要利用总个数处理判断。</p>
+<p><code>$timeout</code>方法是这个实现效果中的核心方法，实现思路是先判断跳动中当前的数字和总个数的关系，如果已完成一圈需要将代表圈数的变量减一，否则继续递归调用next()方法，直到circle圈数达到规定圈数，同时选中的奖品的所属次序也等于随机取的值为止：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> timer = $timeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">					<span class="keyword">if</span>(circle &lt;= <span class="number">0</span> &amp;&amp; selkey == key) &#123;</div><div class="line">						$scope.showhide(<span class="number">2</span>, <span class="number">3</span>);</div><div class="line">						$scope.result = $scope.items[key].name;</div><div class="line">						<span class="keyword">return</span>;</div><div class="line">					&#125;</div><div class="line">					<span class="keyword">if</span>($scope.items.length == key + <span class="number">1</span>) &#123;</div><div class="line">						circle--;</div><div class="line">					&#125;</div><div class="line">					<span class="keyword">if</span>($scope.items[key + <span class="number">1</span>]) &#123;</div><div class="line">						next(key + <span class="number">1</span>);</div><div class="line">					&#125; <span class="keyword">else</span> &#123;</div><div class="line">						next(<span class="number">0</span>);</div><div class="line">					&#125;</div><div class="line">				&#125;, <span class="number">100</span>);</div></pre></td></tr></table></figure>
+<h4 id="奖品显示页面方法"><a href="#奖品显示页面方法" class="headerlink" title="奖品显示页面方法"></a>奖品显示页面方法</h4><p>这是第三个页面，除了显示奖品之外，只有重新开始抽奖和进入修改奖品页面这两个键，只需直接调用前面定义好的通用切换页面的方法即可：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$scope.reset = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">			$scope.showhide(<span class="number">3</span>, <span class="number">1</span>);</div><div class="line">		&#125;;</div><div class="line">		$scope.edit = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">			$scope.showhide(<span class="number">3</span>, <span class="number">4</span>);</div><div class="line">		&#125;;</div></pre></td></tr></table></figure>
+<h4 id="增删奖品的页面方法"><a href="#增删奖品的页面方法" class="headerlink" title="增删奖品的页面方法"></a>增删奖品的页面方法</h4><p>其实本质上就是对数组元素的增加或是删除，首先是增加奖品的方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$scope.add = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">			<span class="keyword">var</span> last_id = lastid();</div><div class="line">			$scope.items.push(&#123;<span class="attr">id</span>: last_id, <span class="attr">name</span>: $scope.name, <span class="attr">status</span>: <span class="number">0</span>&#125;);</div><div class="line">		&#125;;</div></pre></td></tr></table></figure>
+<p>这里面用到了一个获取最后一个元素id号的方法，这个方法主要通过<code>angular.foreach()</code>遍历数组，从而在遍历结束时获取得到最后一个id号。<br>获取了之后再加一，并采用数组的<code>push()</code>方法将增加的对象导入对象数组的最后一位即可。</p>
+<p>下面是删除奖品的方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$scope.del = <span class="function"><span class="keyword">function</span>(<span class="params">id</span>) </span>&#123;</div><div class="line">			angular.forEach($scope.items, <span class="function"><span class="keyword">function</span>(<span class="params">value, key</span>) </span>&#123;</div><div class="line">				<span class="keyword">if</span>(id == value.id) &#123;</div><div class="line">					$scope.items.splice(key, <span class="number">1</span>);</div><div class="line">				&#125;</div><div class="line">			&#125;)</div><div class="line">		&#125;;</div></pre></td></tr></table></figure>
+<p>同样采用<code>angular.foreach()</code>遍历数组，这里需要注意的是，在这第二个参数即调用函数里面的参数，第一个代表的是数组元素值，第二个代表索引值。然后删除的方法是采用<code>splice()</code>方法，这个方法第一个参数代表删除的初始位置，第二个参数代表删除的个数。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在练习制作基于AngularJS的抽奖系统demo之后，加深了自己对于AngularJS制作单页应用开发的理解，也为自己后面的继续学习打下基础。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/html/" rel="tag"># html</a>
+          
+            <a href="/tags/css/" rel="tag"># css</a>
+          
+            <a href="/tags/javascript/" rel="tag"># javascript</a>
+          
+            <a href="/tags/AngularJS/" rel="tag"># AngularJS</a>
+          
+            <a href="/tags/demo/" rel="tag"># demo</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/15/hello-world/" rel="prev" title="Hello World">
+                Hello World <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/homepage/yymhk.png"
+               alt="Yin Zhehao" />
+          <p class="site-author-name" itemprop="name">Yin Zhehao</p>
+          <p class="site-description motion-element" itemprop="description">饮水思源 止于至善</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#心得与技巧"><span class="nav-number">2.</span> <span class="nav-text">心得与技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#整体设计思路"><span class="nav-number">2.1.</span> <span class="nav-text">整体设计思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#视图层的实现分析"><span class="nav-number">2.2.</span> <span class="nav-text">视图层的实现分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#js控制代码分析"><span class="nav-number">2.3.</span> <span class="nav-text">js控制代码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#初始化方法"><span class="nav-number">2.3.1.</span> <span class="nav-text">初始化方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#抽奖方法"><span class="nav-number">2.3.2.</span> <span class="nav-text">抽奖方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#奖品显示页面方法"><span class="nav-number">2.3.3.</span> <span class="nav-text">奖品显示页面方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#增删奖品的页面方法"><span class="nav-number">2.3.4.</span> <span class="nav-text">增删奖品的页面方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yin Zhehao</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
