@@ -80,7 +80,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="javascript，提升," />
+  <meta name="keywords" content="javascript，LHS，RHS," />
 
 
 
@@ -96,16 +96,16 @@
 
 
 
-<meta name="description" content="前言本文主要记录和总结了JavaScript中关于声明提升的概念和相关注意事项。">
+<meta name="description" content="前言本文主要对JavaScript中的LHS和RHS进行解释介绍，并进行相应的举例说明。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript中声明的提升">
-<meta property="og:url" content="http://yinzhehao.top/2016/01/04/JavaScript中声明的提升/index.html">
+<meta property="og:title" content="JavaScript中的LHS和RHS">
+<meta property="og:url" content="http://yinzhehao.top/2017/02/21/JavaScript中的LHS和RHS/index.html">
 <meta property="og:site_name" content="Yinzhehao blog">
-<meta property="og:description" content="前言本文主要记录和总结了JavaScript中关于声明提升的概念和相关注意事项。">
-<meta property="og:updated_time" content="2017-02-27T09:44:15.553Z">
+<meta property="og:description" content="前言本文主要对JavaScript中的LHS和RHS进行解释介绍，并进行相应的举例说明。">
+<meta property="og:updated_time" content="2017-02-27T09:49:15.853Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaScript中声明的提升">
-<meta name="twitter:description" content="前言本文主要记录和总结了JavaScript中关于声明提升的概念和相关注意事项。">
+<meta name="twitter:title" content="JavaScript中的LHS和RHS">
+<meta name="twitter:description" content="前言本文主要对JavaScript中的LHS和RHS进行解释介绍，并进行相应的举例说明。">
 
 
 
@@ -133,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="http://yinzhehao.top/2016/01/04/JavaScript中声明的提升/"/>
+  <link rel="canonical" href="http://yinzhehao.top/2017/02/21/JavaScript中的LHS和RHS/"/>
 
 
 
 
 
-  <title> JavaScript中声明的提升 | Yinzhehao blog </title>
+  <title> JavaScript中的LHS和RHS | Yinzhehao blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -295,7 +295,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yinzhehao.top/2016/01/04/JavaScript中声明的提升/">
+  <link itemprop="mainEntityOfPage" href="http://yinzhehao.top/2017/02/21/JavaScript中的LHS和RHS/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Yin Zhehao">
@@ -319,7 +319,7 @@
             
             
               
-                JavaScript中声明的提升
+                JavaScript中的LHS和RHS
               
             
           </h1>
@@ -334,8 +334,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-01-04T17:51:14+08:00">
-                2016-01-04
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-21T17:51:14+08:00">
+                2017-02-21
               </time>
             
 
@@ -397,32 +397,41 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文主要记录和总结了JavaScript中关于声明提升的概念和相关注意事项。<br><a id="more"></a> </p>
-<h2 id="提升（Hoisting）"><a href="#提升（Hoisting）" class="headerlink" title="提升（Hoisting）"></a>提升（Hoisting）</h2><p>我们常习惯将<code>var a = 2;</code> 看作是一个声明，而实际上JS引擎并不这么认为。它将<code>var a</code>和<code>a = 2</code>当作两个单独的声明，第一个是编辑阶段的任务，而第二个是执行阶段的任务。</p>
-<p>这意味着无论作用域中的声明出现在什么地方，都将在代码本身被执行前首先进行处理，可以将这个过程形象地想象成所有的声明（函数和变量）都会被“移动”到各自作用域的最顶端，这个过程称为<strong>提升(Hoisting)</strong>。</p>
-<blockquote>
-<p>注意</p>
-<ul>
-<li>包括变量和函数在内的所有声明都会在任何代码被执行前首先被处理。</li>
-<li>只有声明本身会被提升，而赋值或其他运行逻辑会留在原地。</li>
-<li>变量声明和函数声明会被提升，但是函数表达式声明不会被提升。</li>
-<li>变量声明和函数声明都会被提升，但是当两者同时出现时，首先提升的是函数声明，其次才是变量声明。</li>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文主要对JavaScript中的LHS和RHS进行解释介绍，并进行相应的举例说明。<br><a id="more"></a> </p>
+<h2 id="LHS-amp-RHS"><a href="#LHS-amp-RHS" class="headerlink" title="LHS &amp; RHS"></a>LHS &amp; RHS</h2><h3 id="概念分析"><a href="#概念分析" class="headerlink" title="概念分析"></a>概念分析</h3><ul>
+<li>LHS与RHS是JavaScript引擎的两种查找类型，含义是赋值操作的左侧与右侧。</li>
+<li>LHS(Left Hand Side)：对哪个赋值就对哪个进行LHS引用，可以理解为赋值操作的目标。</li>
+<li>RHS(Right Hand Side)：需要获取哪个变量的值，就对哪个变量的值进行RHS引用，理解为赋值操作的源头。</li>
+<li>可以简单的记忆为：一般在左边的需要被赋值，就是LHS引用；右边需要寻找到它的值，就是RHS引用。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">a</span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> b=a;</div><div class="line">	rerurn a+b;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> c=foo(<span class="number">2</span>);</div></pre></td></tr></table></figure>
+</li>
 </ul>
-</blockquote>
-<p>下面给出具体的实例说明。<br>（1）只有声明本身会被提升，而赋值或其他运行逻辑会留在原地。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">a = <span class="number">2</span>;</div><div class="line"><span class="keyword">var</span> a;</div><div class="line"><span class="built_in">console</span>.log(a);   <span class="comment">// 2</span></div></pre></td></tr></table></figure></p>
-<p>变量声明<code>var a</code>会被提升至作用域顶端，执行代码输出2。上述代码等效于<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a;</div><div class="line">a = <span class="number">2</span>;</div><div class="line"><span class="built_in">console</span>.log(a);   <span class="comment">// 2</span></div></pre></td></tr></table></figure></p>
-<p>而对于下述代码，只会将变量声明提升，变量赋值不会提升，故输出<code>undefined</code>。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(a);    <span class="comment">// undefined</span></div><div class="line"><span class="keyword">var</span> a = <span class="number">2</span>;</div></pre></td></tr></table></figure></p>
-<p>上述代码等效于<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a;</div><div class="line"><span class="built_in">console</span>.log(a);   <span class="comment">// undefined</span></div><div class="line">a = <span class="number">2</span>;</div></pre></td></tr></table></figure></p>
-<p>（2）变量声明和函数声明会被提升，但是函数表达式声明不会被提升。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">foo();</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(a);    <span class="comment">// undefined</span></div><div class="line">	<span class="keyword">var</span> a = <span class="number">2</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>上述代码中，函数声明会被提升，最终输出结果为<code>undefined</code>。上述代码等效于<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> a;</div><div class="line">	<span class="built_in">console</span>.log(a);    <span class="comment">// undefined</span></div><div class="line">	a = <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line">foo();</div></pre></td></tr></table></figure></p>
-<p>函数声明会被提升，但是函数表达式声明不会被提升。对于下述代码中，函数表达式并不会被提升。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">foo();  <span class="comment">//不是ReferenceError,而是TypeError</span></div><div class="line">bar();   <span class="comment">//ReferenceError</span></div><div class="line"><span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(a);    <span class="comment">// undefined</span></div><div class="line">	<span class="keyword">var</span> a = <span class="number">2</span>;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>上述代码等效于<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> foo;</div><div class="line">foo();  <span class="comment">//不是ReferenceError,而是TypeError</span></div><div class="line">bar();   <span class="comment">//ReferenceError</span></div><div class="line">foo = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> bar = ... self ...</div><div class="line">	var a;</div><div class="line">	<span class="built_in">console</span>.log(a);    <span class="comment">// undefined</span></div><div class="line">	a = <span class="number">2</span>;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>变量标识符<code>foo</code>被提升至作用域顶端，因此当执行<code>foo()</code>时，作用域中已经存在<code>foo</code>变量，作用域查找正常，故不是ReferenceError，但是由于采用函数表达式声明的方式创建函数<code>foo()</code>，函数表达式声明并不能被提升，故此时<code>foo</code>未被赋值，执行<code>foo()</code>时，<code>foo()</code>由于对undefined值进行函数调用而导致非法操作，因此会抛出<code>TypeError</code>。</p>
-<p>不论是匿名函数表达式，还是具名函数表达式，名称标识符在赋值之前也无法在所在作用域中使用。<code>var foo = function bar(){};</code>会被解释成为<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">foo = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> bar = ... self ...</div><div class="line">	<span class="comment">//...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>因此，在执行<code>bar()</code>时，作用域查找失败，会抛出<code>ReferenceError</code>，而不是<code>TypeError</code>。 </p>
-<p>（3） 变量声明和函数声明都会被提升，但是当两者同时出现时，首先提升的是函数声明，其次才是变量声明。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">foo();  <span class="comment">//1</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> foo;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="number">1</span>);</div><div class="line">&#125;</div><div class="line">foo = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="number">2</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>上述代码在执行过程中等效于<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="number">1</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line">foo();  <span class="comment">//1</span></div><div class="line"></div><div class="line">foo = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="number">2</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>变量声明和函数声明都会被提升，但是当两者同时出现时，首先提升的是函数声明，其次才是变量声明。因此，函数声明<code>function foo(){..}</code>首先被提升。其次，提升变量声明<code>foo</code>,但是此时作用域中已经有foo变量，因此<code>var foo;</code>属于重复的声明，因此被忽略了。最后，<code>foo = function(){..}</code>属于函数表达式声明，不会被提升。</p>
+<p>以上代码中有3个LHS与4个RHS，分析如下：</p>
+<ul>
+<li><code>var c</code>中的<code>c</code>需要被赋值，在赋值操作的左侧，所以对<code>c</code>进行<code>LHS</code>引用</li>
+<li>变量<code>c</code>需要被赋值，它的值是<code>foo(2)</code>，那么<code>foo(2)</code>的值是多少呢，需要查找<code>foo(2)</code>的值，在赋值操作的右侧，所以对<code>foo(2)</code>进行<code>RHS</code>引用</li>
+<li>隐含赋值操作，将2传递给<code>function foo(a){……}</code>函数的参数<code>a</code>，<code>a</code>在赋值操作的左侧，对<code>a</code>进行<code>LHS</code>引用</li>
+<li><code>var b=a;</code>中，<code>b</code>需要被赋值，处在赋值操作的左侧，所以<code>b</code>进行的<code>LHS</code>，<code>b</code>的值将从<code>a</code>来，那么右侧的<code>a</code>的值从何而来呢？这就需要对赋值操作右侧的<code>a</code>进行<code>RHS</code></li>
+<li><code>return a+b;</code>中，需要找到<code>a</code>与<code>b</code>的值的来源，<code>a</code>与<code>b</code>都在赋值操作的右侧，才能得到<code>a+b</code>的值，所以对<code>a</code>与<code>b</code>都是进行<code>RHS</code>引用<h3 id="1-2-异常解释"><a href="#1-2-异常解释" class="headerlink" title="1.2 异常解释"></a>1.2 异常解释</h3>之所以区分LHS和RHS，只因为在遍历还没有声明（在任何作用域中都无法找到该变量）的情况下，这两种查询的行为是不一样的。</li>
+<li>LHS和RHS查询都会在当前执行作用域中开始，如果有需要（即没有在当前作用域中查找到所需的标识符），就会向上级作用域继续查找目标标识符，直至抵达全局作用域，查找停止。</li>
+<li>不成功的RHS引用会导致<code>ReferenceError</code>异常。不成功的LHS引用会导致自动隐式地创建一个全局变量（非严格模式下），该变量使用LHS引用的目标作为标识符，或者抛出<code>ReferenceError</code>异常（严格模式下）。</li>
+<li><code>ReferenceError</code>同作用域判别失败相关，而<code>TypeError</code>则代表作用域判别成功了，但是对结果的操作是非法或者不合理的。查询到变量之后（已经表明作用域判别成功，不会出现<code>ReferenceError</code>异常），对这个变量进行不合理的操作，比如试图对一个非函数类型的值进行函数调用，或者引用null或undefined类型值中的属性，那么引擎会抛出<code>TypeError</code>异常。</li>
+<li><p>ES5中引入了“严格模式”。同正常模式（或称为宽松/懒惰模式相比），严格模式在行为上有很多不同，其中一个不同的行为则是严格模式禁止自动或隐式创建全局变量。因此，严格模式下，LHS查找失败后，不会自动隐式创建全局变量，只会抛出<code>ReferenceError</code>异常。</p>
+</li>
+<li><p>代码1</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">a</span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(a+b);   <span class="comment">// b- RHS, a- RHS</span></div><div class="line">	b = a;              <span class="comment">// b- LHS,  a- RHS</span></div><div class="line">&#125;</div><div class="line">foo(<span class="number">2</span>);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>第一次对b进行RHS查询时，无法找到该变量，在其上级作用域（全局作用域）中依旧无法找到变量b，因此，引擎将抛出 <code>ReferenceError</code>异常。</p>
+<p>若将代码1修改，在全局作用域中声明变量b，则在函数foo作用中对b进行RHS查找失败后，会自动向上一级的全局作用域中查找变量b。查找成功后，程序正常输出：12。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">a</span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(a+b);   <span class="comment">// b- RHS, a- RHS</span></div><div class="line">	b = a;              <span class="comment">// b- LHS,  a- RHS</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> b = <span class="number">10</span>;</div><div class="line">foo(<span class="number">2</span>);          <span class="comment">// 输出 12</span></div></pre></td></tr></table></figure></p>
+<p>若将上述代码再次修改，在全局作用域中声明变量b，并在局部作用域中声明变量b，则在函数foo作用中，使用局部变量<code>b=3</code>。全局作用域中，使用局部变量<code>b=10</code>。这种现象称为“遮蔽效应”（内部的标识符“遮蔽”了外部的标识符）。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">a</span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> b = <span class="number">3</span>;</div><div class="line">	<span class="built_in">console</span>.log(a+b);   <span class="comment">// b- RHS, a- RHS  输出：5</span></div><div class="line">	b = a;              <span class="comment">// b- LHS,  a- RHS</span></div><div class="line">	<span class="built_in">console</span>.log(<span class="string">"Global Scope: "</span>+b);           <span class="comment">//2</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> b = <span class="number">10</span>;</div><div class="line"><span class="built_in">console</span>.log(<span class="string">"Global Scope: "</span>+b);    <span class="comment">// 10</span></div><div class="line">foo(<span class="number">2</span>);          <span class="comment">// 输出 12</span></div></pre></td></tr></table></figure></p>
+<ul>
+<li>代码2<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params">a</span>)</span>&#123;</div><div class="line">	b = a + <span class="number">3</span>;       </div><div class="line">&#125;</div><div class="line">init(<span class="number">2</span>);    </div><div class="line"><span class="built_in">console</span>.log(b);    <span class="comment">//5</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>上述代码中，对b进行LHS。局部作用中查找变量b失败后，转向全局变量中查找变量b，依旧失败后，由于是LHS查询，因此会自动隐式创建一个全局变量b（这点与RHS不同）。因此，上述代码可以正常运行，并输出：5。</p>
+<p>若将代码2修改，在局部作用域中声明变量b，则在全局作用域中执行<code>console.log(b);</code>,由于全局作用域中未声明变量b，因此将给出<code>ReferenceError</code>异常：<code>ReferenceError: b is not defined.</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params">a</span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> b = a + <span class="number">3</span>;       </div><div class="line">&#125;</div><div class="line">init(<span class="number">2</span>);    </div><div class="line"><span class="built_in">console</span>.log(b);    <span class="comment">//5</span></div></pre></td></tr></table></figure></p>
+<p>则在函数foo作用中对b进行RHS查找失败后，会自动向上一级的全局作用域中查找变量b。查找成功后，程序正常输出：12。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>[1] <a href="http://www.cnblogs.com/yangxiaoguai132/p/5064625.html" target="_blank" rel="external">javascript中的LHS与RHS</a></p>
 
       
     </div>
@@ -446,7 +455,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/javascript，提升/" rel="tag"># javascript，提升</a>
+            <a href="/tags/javascript，LHS，RHS/" rel="tag"># javascript，LHS，RHS</a>
           
         </div>
       
@@ -455,15 +464,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/01/23/JavaScript关于DOM编程的最佳实践/" rel="next" title="JavaScript关于DOM编程的最佳实践">
+                <i class="fa fa-chevron-left"></i> JavaScript关于DOM编程的最佳实践
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/01/23/JavaScript关于DOM编程的最佳实践/" rel="prev" title="JavaScript关于DOM编程的最佳实践">
-                JavaScript关于DOM编程的最佳实践 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -586,7 +595,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提升（Hoisting）"><span class="nav-number">2.</span> <span class="nav-text">提升（Hoisting）</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LHS-amp-RHS"><span class="nav-number">2.</span> <span class="nav-text">LHS & RHS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概念分析"><span class="nav-number">2.1.</span> <span class="nav-text">概念分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-异常解释"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 异常解释</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
