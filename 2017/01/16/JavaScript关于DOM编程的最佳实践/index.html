@@ -96,16 +96,16 @@
 
 
 
-<meta name="description" content="前言本篇博文记录总结了如何通过创建新元素和修改现有元素来改变网页结果。主要包括传统技术和DOM方法这两种。">
+<meta name="description" content="前言本博客记录总结了JavaScript关于DOM编程的一些最佳实践。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript动态动态创建标记技术">
-<meta property="og:url" content="http://yinzhehao.top/2016/11/10/JavaScript动态动态创建标记技术/index.html">
+<meta property="og:title" content="JavaScript关于DOM编程的最佳实践">
+<meta property="og:url" content="http://yinzhehao.top/2017/01/16/JavaScript关于DOM编程的最佳实践/index.html">
 <meta property="og:site_name" content="Yinzhehao blog">
-<meta property="og:description" content="前言本篇博文记录总结了如何通过创建新元素和修改现有元素来改变网页结果。主要包括传统技术和DOM方法这两种。">
-<meta property="og:updated_time" content="2017-02-27T09:43:20.518Z">
+<meta property="og:description" content="前言本博客记录总结了JavaScript关于DOM编程的一些最佳实践。">
+<meta property="og:updated_time" content="2017-02-27T09:53:43.260Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaScript动态动态创建标记技术">
-<meta name="twitter:description" content="前言本篇博文记录总结了如何通过创建新元素和修改现有元素来改变网页结果。主要包括传统技术和DOM方法这两种。">
+<meta name="twitter:title" content="JavaScript关于DOM编程的最佳实践">
+<meta name="twitter:description" content="前言本博客记录总结了JavaScript关于DOM编程的一些最佳实践。">
 
 
 
@@ -133,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="http://yinzhehao.top/2016/11/10/JavaScript动态动态创建标记技术/"/>
+  <link rel="canonical" href="http://yinzhehao.top/2017/01/16/JavaScript关于DOM编程的最佳实践/"/>
 
 
 
 
 
-  <title> JavaScript动态动态创建标记技术 | Yinzhehao blog </title>
+  <title> JavaScript关于DOM编程的最佳实践 | Yinzhehao blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -295,7 +295,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yinzhehao.top/2016/11/10/JavaScript动态动态创建标记技术/">
+  <link itemprop="mainEntityOfPage" href="http://yinzhehao.top/2017/01/16/JavaScript关于DOM编程的最佳实践/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Yin Zhehao">
@@ -319,7 +319,7 @@
             
             
               
-                JavaScript动态动态创建标记技术
+                JavaScript关于DOM编程的最佳实践
               
             
           </h1>
@@ -334,8 +334,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-10T17:51:14+08:00">
-                2016-11-10
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-16T17:51:14+08:00">
+                2017-01-16
               </time>
             
 
@@ -397,34 +397,42 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本篇博文记录总结了如何通过创建新元素和修改现有元素来改变网页结果。主要包括传统技术和DOM方法这两种。<br><a id="more"></a> </p>
-<h2 id="动态创建标记"><a href="#动态创建标记" class="headerlink" title="动态创建标记"></a>动态创建标记</h2><p>本章节将讲述如何通过创建新元素和修改现有元素来改变网页结果。主要包括传统技术和DOM方法这两种。</p>
-<ul>
-<li>传统技术： <code>document.write()</code> ,  <code>innerHTML</code></li>
-<li>DOM技术： <code>createElement</code>,  <code>createTextNode</code>, <code>appendChild</code>,  <code>insertBefore</code><br>(在任何时候，标准的DOM都可以用来替代innerHTML)<h3 id="传统技术"><a href="#传统技术" class="headerlink" title="传统技术"></a>传统技术</h3></li>
-<li><p><code>document.write()</code></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">document</span>.write(<span class="string">"&lt;p&gt;Demo&lt;/p&gt;"</span>);</div></pre></td></tr></table></figure>
-</li>
-<li><p><code>innerHTML</code></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> testdiv = <span class="built_in">document</span>.getElementById(<span class="string">"testdiv"</span>);</div><div class="line">testdiv.innerHTML = <span class="string">"Div Content"</span>;</div><div class="line">testdiv.innerHTML = <span class="string">"&lt;p&gt;ChildNode Demo&lt;/p&gt;"</span>;</div></pre></td></tr></table></figure>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本博客记录总结了JavaScript关于DOM编程的一些最佳实践。<br><a id="more"></a> </p>
+<h2 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h2><h3 id="web性能优化"><a href="#web性能优化" class="headerlink" title="web性能优化"></a>web性能优化</h3><ul>
+<li>尽量减少访问DOM<br>只要是查询DOM中的某些元素，浏览器都会搜索整个DOM树，从中查找可能匹配的元素。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(<span class="built_in">document</span>.getElementsByTagName(<span class="string">"a"</span>).length &gt; <span class="number">0</span>)</div><div class="line">&#123;</div><div class="line">	<span class="keyword">var</span> links = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"a"</span>);</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;links.length;i++)&#123;</div><div class="line">		<span class="comment">//do something</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="DOM技术"><a href="#DOM技术" class="headerlink" title="DOM技术"></a>DOM技术</h3><ul>
-<li><code>createElement</code> ： 创建一个元素节点（不能创建文本节点），但是该节点并未插入DOM树中，是游历于文档之外的。</li>
-<li><code>appendChild</code> ：把新创建的节点插入到文档的DOM树中。</li>
-<li><code>createTextNode</code>： 创建一个文本节点（不能创建元素节点），但是该节点并未插入DOM树中，是游历于文档之外的。</li>
-<li><code>parentNode.insertBefore(newNode,referenceNode)</code>：将一个新节点插入到参考节点之前，这两个节点都是<code>parentNode</code>的子节点。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> parentNode = <span class="built_in">document</span>.getElementById(<span class="string">"content"</span>);</div><div class="line"><span class="keyword">var</span> para = <span class="built_in">document</span>.createElement(<span class="string">"p"</span>);</div><div class="line"><span class="keyword">var</span> txt1 = <span class="built_in">document</span>.createTextNode(<span class="string">"This is"</span>);</div><div class="line">para.appendChild(txt1); <span class="comment">//&lt;p&gt;This is &lt;/p&gt;</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> emphasis = <span class="built_in">document</span>.createElement(<span class="string">"em"</span>);</div><div class="line"><span class="keyword">var</span> txt2 = <span class="built_in">document</span>.createTextNode(<span class="string">" my"</span>);</div><div class="line">emphasis.appendChild(txt2);</div><div class="line">para.appendChild(emphasis); <span class="comment">//&lt;p&gt;This is &lt;em&gt;my&lt;/em&gt; &lt;/p&gt;</span></div><div class="line"></div><div class="line">parentNode.appendChild(para);</div><div class="line"></div><div class="line"><span class="keyword">var</span> txt3 = <span class="built_in">document</span>.createTextNode(<span class="string">" node"</span>);</div><div class="line">para.appendChild(txt3);  <span class="comment">//&lt;p&gt;This is &lt;em&gt;my&lt;/em&gt; node&lt;/p&gt;</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> head1 = <span class="built_in">document</span>.createElement(<span class="string">"h1"</span>);</div><div class="line"><span class="keyword">var</span> txt4 = <span class="built_in">document</span>.createTextNode(<span class="string">"Head 1"</span>);</div><div class="line">head1.appendChild(txt4);  <span class="comment">//&lt;h1&gt;Head 1&lt;/h1&gt;</span></div><div class="line"></div><div class="line">parentNode.insertBefore(head1,para); <span class="comment">//!!</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>上述代码，将创建一个如下所示的HTML文档。注意上述代码中最后一句中<code>insertBefore</code>的用法（将一个新节点插入到父节点中指定的子节点的前面，新插入的节点是父节点的子节点）。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"content"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">h1</span>&gt;</span>Head 1<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">p</span>&gt;</span>This is <span class="tag">&lt;<span class="name">em</span>&gt;</span>my<span class="tag">&lt;/<span class="name">em</span>&gt;</span> node<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>上述代码中，执行<code>document.getElementsByTagName(&quot;a&quot;).length</code>时，会搜索整个DOM树；执行<code>document.getElementsByTagName(&quot;a&quot;);</code>时，会再次搜索整个DOM树。当DOM元素较多时，搜索整个DOM树是一个很耗时的操作。针对上述代码，作出如下优化：将第一次DOM树搜索的结果保存至一个变量中，将搜索次数减少1次。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> links = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"a"</span>);</div><div class="line"><span class="keyword">if</span>(links.length &gt; <span class="number">0</span>)</div><div class="line">&#123;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;links.length;i++)&#123;</div><div class="line">		<span class="comment">//do something</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <ul>
-<li><code>insertAfter()</code><br>DOM本身并没有提供<code>insertAfter()</code>方法，但是可以借助于<code>insertBefore()</code>和<code>appendchild()</code>方法实现该<code>insertAfter()</code>方法。<blockquote>
-<p>parentElement.insertBefore(newElement,targetElement);</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertAfter</span>(<span class="params">newElement,targetElement</span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> parent = targetElement.parentNode;</div><div class="line">	<span class="keyword">if</span>(parentNode.lastChild == targetElement)&#123;</div><div class="line">		parent.appendChild(newElement);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span>&#123;</div><div class="line">		parent.insertBefore(newElement,targetElement.nextSibling);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<li>尽量减少文档中的标记数量。过多不必要的元素只会增加DOM树的规模，进而增加遍历DOM树以查找特定元素的时间。</li>
+<li>将多个js文件合并并放置在合适的位置<br>将多个js文件合并，可以减少HTTP请求次数。</li>
+</ul>
+<blockquote>
+<p>根据HTTP规范，浏览器每次从同一个域名中最多只能同时下载2个文件。</p>
 </blockquote>
-</li>
+<p>将引入的外部js文件的<code>&lt;script&gt;</code>标签放置到文档的末尾（<code>&lt;/body&gt;</code>标签之前），可以使页面更快的加载。若将<code>&lt;script&gt;</code>标签放置于<code>&lt;head&gt;</code>中，则执行到<code>&lt;script&gt;</code>标签时，浏览器会先加载js文件，加载完成后才会执行<code>&lt;body&gt;</code>标签中的内容，才会创建DOM树，这样会影响页面加载速度。</p>
+<ul>
+<li>压缩脚本<br>脚本文件编写完成后，进行脚本压缩，可以减少文件体积，减轻服务器压力。在实际的工程中，可以保存2个版本的脚本：一个工作副本，用于修改，调试和注释；一个精简副本，压缩之后上传到服务器。精简副本（压缩后的脚本）一般在文件名中后缀上<code>min</code>进行标识。</li>
 </ul>
-<p>上述代码中，<code>nextSibling</code>表示下一个兄弟节点。</p>
+<p>常用的脚本压缩工具如下所示。<br>[1] <a href="http://crockford.com/javascript/jsmin" target="_blank" rel="external">Douglas Crockford的JSMin</a><br>[2] <a href="http://yui.github.io/yuicompressor/" target="_blank" rel="external">Yahoo的YUI Compressor</a><br>[3] <a href="https://developers.google.com/closure/compiler/" target="_blank" rel="external">Google的Closure Compiler</a><br>[4] <a href="https://github.com/pandamicro/Javascript-Compressors-Analyse" target="_blank" rel="external">Javascript压缩混淆工具比较分析</a></p>
+<h3 id="平稳退化"><a href="#平稳退化" class="headerlink" title="平稳退化"></a>平稳退化</h3><p>如果正确地使用了js脚本，就可以让访问者在他们的浏览器不支持js或者禁用js的情况下，仍然能够顺利地访问你的网站，最基本的操作仍然能顺利实现（虽然有可能部分功能无法使用），这就是<em>平稳退化</em>。（Graceful Degradation，也叫做<em>优雅降级</em>）</p>
+<p>此处以<a href="https://www.google.com" target="_blank" rel="external">Google</a>网站为例，说明平稳退化。访问<a href="https://www.google.com" target="_blank" rel="external">Google</a>网站，若此时浏览器支持js，点击右上角的<em>Google应用</em>图标，则会弹出一个下拉框，下拉框中显示了各种Google应用；若浏览器禁用了js或者不支持js，点击右上角的<em>Google应用</em>图标，则会跳转至<a href="https://www.google.com/intl/zh-CN/about/products/" target="_blank" rel="external">Google Product</a>网页。</p>
+<p>上述功能，可以用下述代码实现。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;a href=<span class="string">"https://www.google.com/intl/zh-CN/about/products"</span> onclick=<span class="string">"myFunctionName(); return false"</span>&gt;Baidu&lt;<span class="regexp">/a&gt;</span></div></pre></td></tr></table></figure></p>
+<p>当浏览器支持js时，点击<code>&lt;a&gt;</code>标签，执行<code>myFunctionName()</code>函数（实现对应的效果，比如显示一个下拉框）；此时，由于<code>return false</code>的存在，会阻止<code>&lt;a&gt;</code>标签的默认行为，禁止跳转至新的界面。若浏览器不支持js，则点击 <code>&lt;a&gt;</code>标签，会执行<code>&lt;a&gt;</code>标签的默认行为，跳转至href指定的网址中。</p>
+<p>本章节参考资料：<br>[1] <a href="http://www.mamicode.com/info-detail-1454763.html" target="_blank" rel="external">JavaScrtip之平稳退化</a><br>[2] <a href="http://www.dongcoder.com/detail-137222.html" target="_blank" rel="external">渐进增强与平稳退化</a><br>[3] <a href="http://www.lai18.com/content/9777277.html" target="_blank" rel="external">javascript平稳退化</a></p>
+<h3 id="渐进增强"><a href="#渐进增强" class="headerlink" title="渐进增强"></a>渐进增强</h3><blockquote>
+<p>所谓的”渐进增强”就是使用一些额外的信息层去包裹原始数据。按照”渐进增强”原则创建出的网站几乎（如果不是“全部”的话）都会支持”平稳退化”。</p>
+</blockquote>
+<p>渐进增强原则基于这样一种思想：你应该总是从最核心的部分，也就是从内容开始。应该根据内容使用标记良好的结构；然后再逐步加强这些内容。这些增强工作可以是通过CSS改进呈现效果，也可以是通过DOM添加各种行为。如果你使用DOM添加内容核心，那么你添加的未免太迟了，内容应该在刚开始编写文档时就成为文档的组成部分。</p>
+<p>例如，<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span> Welcome,Shanghai! <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>上述代码中的<code>&lt;p&gt;</code>元素时页面中最核心的内容。下面考虑渐进增强，若页面支持CSS3，可以对其样式修饰。即使页面不支持CSS3，页面仍然能正常显示，符合“平稳退化”。<br>在判断文档中是否支持CSS或者js或者DOM行为等时，可以采用对象检测<code>(Object Detection)</code>（参见<em>5.4  向后兼容 </em>章节）。</p>
+<p>本章节参考资料：<br>[1]  <a href="http://www.imooc.com/article/9949" target="_blank" rel="external">什么是“平稳退化”和“渐进增强”理念？</a></p>
+<h3 id="向后兼容"><a href="#向后兼容" class="headerlink" title="向后兼容"></a>向后兼容</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(method)&#123;</div><div class="line">	statements;</div><div class="line">&#125;</div><div class="line"><span class="comment">//else&#123; &#125;</span></div></pre></td></tr></table></figure>
+<p>对象检测<code>(Object Detection)</code>的使用方式如上述代码所示。将某一个方法method打包在if语句中，若支持该方法，则执行相应的操作。</p>
+<p>这样编写代码，可以保证向后兼容。即若浏览器对js或DOM支持程度较高，支持某些的方法，则调用该方法。对于比较古老的浏览器，若不支持该方法，则执行else语句中的内容。从而保证了对新浏览器或新语法的支持，这就是<em>向后兼容</em>。</p>
+<p>向后兼容的实例如下所示。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(<span class="built_in">document</span>.getElementsByClassName)&#123;</div><div class="line">	<span class="keyword">var</span> content = <span class="built_in">document</span>.getElementsByClassName(<span class="string">"content"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>工程中更常用的做法为若不支持该方法，则返回false。使用<code>或</code>符号，可以同时检测多个方法。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(!method1 || !method2 || !method3) <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line"><span class="comment">//do something with these methods</span></div></pre></td></tr></table></figure></p>
+<p>或者<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> support = method1 &amp;&amp; method2 &amp;&amp; method2</div><div class="line"><span class="keyword">if</span>(!support) <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line"><span class="comment">//do something with these methods</span></div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -459,8 +467,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/04/JavaScript中的闭包与this/" rel="next" title="JavaScript中的闭包与this">
-                <i class="fa fa-chevron-left"></i> JavaScript中的闭包与this
+              <a href="/2017/01/04/JavaScript中声明的提升/" rel="next" title="JavaScript中声明的提升">
+                <i class="fa fa-chevron-left"></i> JavaScript中声明的提升
               </a>
             
           </div>
@@ -469,8 +477,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/11/25/明星介绍网站练习总结(一)/" rel="prev" title="明星介绍网站练习总结(一)">
-                明星介绍网站练习总结(一) <i class="fa fa-chevron-right"></i>
+              <a href="/2017/01/23/基于AngularJS的抽奖系统练习总结/" rel="prev" title="基于AngularJS的抽奖系统练习总结">
+                基于AngularJS的抽奖系统练习总结 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -594,7 +602,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态创建标记"><span class="nav-number">2.</span> <span class="nav-text">动态创建标记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#传统技术"><span class="nav-number">2.1.</span> <span class="nav-text">传统技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DOM技术"><span class="nav-number">2.2.</span> <span class="nav-text">DOM技术</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最佳实践"><span class="nav-number">2.</span> <span class="nav-text">最佳实践</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#web性能优化"><span class="nav-number">2.1.</span> <span class="nav-text">web性能优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#平稳退化"><span class="nav-number">2.2.</span> <span class="nav-text">平稳退化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#渐进增强"><span class="nav-number">2.3.</span> <span class="nav-text">渐进增强</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#向后兼容"><span class="nav-number">2.4.</span> <span class="nav-text">向后兼容</span></a></li></ol></li></ol></div>
             
 
           </div>
