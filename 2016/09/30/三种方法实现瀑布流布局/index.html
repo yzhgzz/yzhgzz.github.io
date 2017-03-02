@@ -1,0 +1,913 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="javascript,html,css3,jquery," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/homepage/favicon6.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="前言本篇博文主要总结了运用原生javascript、jquery和css3这三种方法实来现经典的瀑布流布局。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="三种方法实现瀑布流布局">
+<meta property="og:url" content="http://yinzhehao.top/2016/09/30/三种方法实现瀑布流布局/index.html">
+<meta property="og:site_name" content="Yinzhehao blog">
+<meta property="og:description" content="前言本篇博文主要总结了运用原生javascript、jquery和css3这三种方法实来现经典的瀑布流布局。">
+<meta property="og:updated_time" content="2017-03-02T04:00:40.656Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="三种方法实现瀑布流布局">
+<meta name="twitter:description" content="前言本篇博文主要总结了运用原生javascript、jquery和css3这三种方法实来现经典的瀑布流布局。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yinzhehao.top/2016/09/30/三种方法实现瀑布流布局/"/>
+
+
+
+
+
+  <title> 三种方法实现瀑布流布局 | Yinzhehao blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Yinzhehao blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle">Try my best</p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yinzhehao.top/2016/09/30/三种方法实现瀑布流布局/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Yin Zhehao">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/homepage/yymhk.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Yinzhehao blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Yinzhehao blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                三种方法实现瀑布流布局
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-30T17:51:14+08:00">
+                2016-09-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Front-end/" itemprop="url" rel="index">
+                    <span itemprop="name">Front-end</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本篇博文主要总结了运用原生javascript、jquery和css3这三种方法实来现经典的瀑布流布局。<br><a id="more"></a></p>
+<blockquote>
+<p>瀑布流，又称瀑布流式布局。是比较流行的一种网站页面布局，视觉表现为参差不齐的多栏布局，随着页面滚动条向下滚动，这种布局还会不断加载数据块并附加至当前尾部。最早采用此布局的网站是<a href="https://www.pinterest.com/" target="_blank" rel="external">Pinterest</a>，逐渐在国内流行开来。国内大多数清新站基本为这类风格。</p>
+<h2 id="js实现"><a href="#js实现" class="headerlink" title="js实现"></a>js实现</h2><h3 id="通用函数的创建"><a href="#通用函数的创建" class="headerlink" title="通用函数的创建"></a>通用函数的创建</h3></blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getClassObj</span>(<span class="params">parent,className</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> obj=parent.getElementsByTagName(<span class="string">'*'</span>);</div><div class="line">    <span class="keyword">var</span> pinS=[];</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;obj.length;i++) &#123;</div><div class="line">        <span class="keyword">if</span> (obj[i].className==className)&#123;</div><div class="line">            pinS.push(obj[i]);</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">    <span class="keyword">return</span> pinS;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个函数通过传入的父节点和类名称实现dom元素的获取，因为我们知道在原生js中没有可以通过类名称直接获取dom元素的函数，所以创建这样一个函数还是很方便的。<br>实现方法：通过父节点的<code>getElementsByTagName(&#39;*&#39;)</code>方法获取下面所有的dom元素，然后对他们进行遍历获取<code>classname</code>的值 ，当与传入的参数类的名称一致就<code>push</code>到数组中保存下来，最后再返回数组即可。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getminHIndex</span>(<span class="params">arr,minH</span>)</span>&#123;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> arr)&#123;</div><div class="line">        <span class="keyword">if</span>(arr[i]==minH)&#123;</div><div class="line">            <span class="keyword">return</span> i;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个函数通过传入的数组和某个高度值这两个参数获取针对这个value值的key值，即数组的序号。实现也很简单，就是遍历数组，比较值与传入的参数值是否相同，再返回键值即可。</p>
+<h3 id="固定图片数量的瀑布流布局"><a href="#固定图片数量的瀑布流布局" class="headerlink" title="固定图片数量的瀑布流布局"></a>固定图片数量的瀑布流布局</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> oParent=<span class="built_in">document</span>.getElementById(parent);</div><div class="line">    <span class="keyword">var</span> aPin=getClassObj(oParent,pin);</div><div class="line">    <span class="keyword">var</span> iPinW=aPin[<span class="number">0</span>].offsetWidth;</div><div class="line">    <span class="keyword">var</span> num=<span class="built_in">Math</span>.floor(<span class="built_in">document</span>.documentElement.clientWidth/iPinW);</div><div class="line">    oParent.style.cssText=<span class="string">'width:'</span>+iPinW*num+<span class="string">'px;ma rgin:0 auto;'</span>;</div></pre></td></tr></table></figure>
+<p>这段代码主要是为了获取每一行排列的固定列数和将外层元素的宽度设置为固定值。实现方法是<code>offsetWidth</code>获取图片的宽度，然后将<code>clientWidth</code>得到的浏览器可视区域宽度除以图片的宽度再向上取整，即为每一行的列数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> pinHArr=[];</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;aPin.length;i++)&#123;</div><div class="line">        <span class="keyword">var</span> pinH=aPin[i].offsetHeight;</div><div class="line">        <span class="keyword">if</span>(i&lt;num)&#123;</div><div class="line">            pinHArr[i]=pinH;</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            <span class="keyword">var</span> minH=<span class="built_in">Math</span>.min.apply(<span class="literal">null</span>,pinHArr);</div><div class="line">            <span class="keyword">var</span> minHIndex=getminHIndex(pinHArr,minH);</div><div class="line">            aPin[i].style.position=<span class="string">'absolute'</span>;</div><div class="line">            aPin[i].style.top=minH+<span class="string">'px'</span>;</div><div class="line">            aPin[i].style.left=aPin[minHIndex].offsetLeft+<span class="string">'px'</span>;</div><div class="line">            pinHArr[minHIndex]+=aPin[i].offsetHeight;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>这段代码实现将后一张图片插入到前面所有图片中距离浏览器顶部最短的那张的下面的效果。主要实现方法是将每一列的尾部距离浏览器顶部距离放入数组中，然后选取最短的那个，获得高度值，作为下一张图片插入来的属性参数值，然后将插入进来的图片高度再加入进去，更新数组值即可。</p>
+<h3 id="判断是否滚动到尾部"><a href="#判断是否滚动到尾部" class="headerlink" title="判断是否滚动到尾部"></a>判断是否滚动到尾部</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkscrollside</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> oParent=<span class="built_in">document</span>.getElementById(<span class="string">'main'</span>);</div><div class="line">    <span class="keyword">var</span> aPin=getClassObj(oParent,<span class="string">'pin'</span>);</div><div class="line">    <span class="keyword">var</span> lastPinH=aPin[aPin.length<span class="number">-1</span>].offsetTop+<span class="built_in">Math</span>.floor(aPin[aPin.length<span class="number">-1</span>].offsetHeight/<span class="number">2</span>);</div><div class="line">    <span class="keyword">var</span> scrollTop=<span class="built_in">document</span>.documentElement.scrollTop||<span class="built_in">document</span>.body.scrollTop;</div><div class="line">    <span class="keyword">var</span> documentH=<span class="built_in">document</span>.documentElement.clientHeight;</div><div class="line">    <span class="keyword">return</span> (lastPinH&lt;scrollTop+documentH)?<span class="literal">true</span>:<span class="literal">false</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个函数的判断条件就是当<code>scrollTop</code>得到的滚动距离加上<code>clientHeight</code>得到的文档的页面高度大于最后一张图片的高度值的一半处距离顶部的高度的时候，就认为滚动条已到底部，返回true。这里需要注意的是，<code>document.documentElement.scrollTop||document.body.scrollTop</code>是兼容性写法，标准模式用前者检测，而混杂模式用后者检测。</p>
+<h3 id="动态添加图片的瀑布流效果"><a href="#动态添加图片的瀑布流效果" class="headerlink" title="动态添加图片的瀑布流效果"></a>动态添加图片的瀑布流效果</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> oParent = <span class="built_in">document</span>.getElementById(<span class="string">'main'</span>);</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;dataInt.data.length;i++)&#123;</div><div class="line">                <span class="keyword">var</span> oPin=<span class="built_in">document</span>.createElement(<span class="string">'div'</span>);</div><div class="line">                oPin.className=<span class="string">'pin'</span>;                </div><div class="line">                oParent.appendChild(oPin);            </div><div class="line">                <span class="keyword">var</span> oBox=<span class="built_in">document</span>.createElement(<span class="string">'div'</span>);</div><div class="line">                oBox.className=<span class="string">'box'</span>;</div><div class="line">                oPin.appendChild(oBox);</div><div class="line">                <span class="keyword">var</span> oImg=<span class="built_in">document</span>.createElement(<span class="string">'img'</span>);</div><div class="line">                oImg.src=<span class="string">'./images/'</span>+dataInt.data[i].src;</div><div class="line">                oBox.appendChild(oImg);</div><div class="line">            &#125;</div></pre></td></tr></table></figure>
+<p>其实这就是一个动态创建元素节点、添加属性、加入文档节点结构中的过程，这里为了方便演示，是用数组来储存将要添加的元素，实际中可以利用服务器端后台处理来不断添加图片。</p>
+<h2 id="jquery实现"><a href="#jquery实现" class="headerlink" title="jquery实现"></a>jquery实现</h2><p>jquery实现的整体思路与javascript是一致的，只不过jquery里面有很多集成的方法，可以是过程相对比较简单一些，而且对兼容性的处理也会相对方便一些。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> $aPin = $( <span class="string">"#main&gt;div"</span> );</div><div class="line">   <span class="keyword">var</span> iPinW = $aPin.eq( <span class="number">0</span> ).width();</div><div class="line">   <span class="keyword">var</span> num = <span class="built_in">Math</span>.floor( $( <span class="built_in">window</span> ).width() / iPinW );</div><div class="line">   $( <span class="string">"#main"</span> ).css(&#123;</div><div class="line">       <span class="string">'width:'</span> : iPinW * num,</div><div class="line">       <span class="string">'margin'</span>: <span class="string">'0 auto'</span></div><div class="line">   &#125;);</div><div class="line">   <span class="keyword">var</span> pinHArr=[];</div><div class="line">   $aPin.each( <span class="function"><span class="keyword">function</span>(<span class="params"> index, value </span>)</span>&#123;</div><div class="line">       <span class="keyword">var</span> pinH = $aPin.eq( index ).height();</div><div class="line">       <span class="keyword">if</span>( index &lt; num )&#123;</div><div class="line">           pinHArr[ index ] = pinH; </div><div class="line">       &#125;<span class="keyword">else</span>&#123;</div><div class="line">           <span class="keyword">var</span> minH = <span class="built_in">Math</span>.min.apply( <span class="literal">null</span>, pinHArr );</div><div class="line">           <span class="keyword">var</span> minHIndex = $.inArray( minH, pinHArr );</div><div class="line">           $( value ).css(&#123;</div><div class="line">               <span class="string">'position'</span>: <span class="string">'absolute'</span>,</div><div class="line">               <span class="string">'top'</span>: minH + <span class="number">15</span>,</div><div class="line">               <span class="string">'left'</span>: $aPin.eq( minHIndex ).position().left</div><div class="line">           &#125;);</div><div class="line">           pinHArr[ minHIndex ] += $aPin.eq( index ).height() + <span class="number">15</span>;</div><div class="line">       &#125;</div></pre></td></tr></table></figure>
+<p>如这里提取jquery对象的选择器方法就非常多和简便，不需要像原生javascript那样先写通过类名称获得dom对象的方法。同时jquery中还支持连缀写法和隐式迭代。还有像这里的each方法的应用也使得循环过程变得简单些。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkscrollside</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> $aPin = $( <span class="string">"#main&gt;div"</span> );</div><div class="line">    <span class="keyword">var</span> lastPinH = $aPin.last().get(<span class="number">0</span>).offsetTop +    <span class="built_in">Math</span>.floor($aPin.last().height()/<span class="number">2</span>);</div><div class="line">    <span class="keyword">var</span> scrollTop = $( <span class="built_in">window</span> ).scrollTop();</div><div class="line">    <span class="keyword">var</span> documentH = $( <span class="built_in">document</span> ).width();</div><div class="line">    <span class="keyword">return</span> (lastPinH &lt; scrollTop + documentH ) ? <span class="literal">true</span> : <span class="literal">false</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里关于获取滚动距离的时候，也不需要考虑兼容性的问题，直接用scrollTop()函数得到即可。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$.each( dataInt.data, <span class="function"><span class="keyword">function</span>(<span class="params"> index, value </span>)</span>&#123;</div><div class="line">                <span class="keyword">var</span> $oPin = $(<span class="string">'&lt;div&gt;'</span>).addClass(<span class="string">'pin'</span>).appendTo( $( <span class="string">"#main"</span> ) );</div><div class="line">                <span class="keyword">var</span> $oBox = $(<span class="string">'&lt;div&gt;'</span>).addClass(<span class="string">'box'</span>).appendTo( $oPin );</div><div class="line">                $(<span class="string">'&lt;img&gt;'</span>).attr(<span class="string">'src'</span>,<span class="string">'./images/'</span> + $( value).attr( <span class="string">'src'</span>) ).appendTo($oBox);</div><div class="line">            &#125;);</div></pre></td></tr></table></figure>
+<p>关于动态添加元素就更显方便了，通过链式写法和自带的函数方法相比于javascript来说可以一步到位。</p>
+<h2 id="css3实现"><a href="#css3实现" class="headerlink" title="css3实现"></a>css3实现</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.container</span>&#123;</div><div class="line">    <span class="attribute">-webkit-column-width</span>:<span class="number">160px</span>;</div><div class="line">    <span class="attribute">-moz-column-width</span>:<span class="number">160px</span>; </div><div class="line">	  <span class="attribute">-webkit-column-gap</span>:<span class="number">5px</span>;</div><div class="line">	  <span class="attribute">-moz-column-gap</span>:<span class="number">5px</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>直接用CSS3的<code>column-width</code> 属性将显示列的宽度固定，用<code>column-gap</code>属性固定好列的间距，这里需要考虑到对Firefox、Safari 和 Chrome 浏览器的兼容性问题。<br>用css3实现瀑布流布局有以下几个特点：</p>
+<ul>
+<li>不需要编码进行计算，而浏览器会自动计算，只需要设置列宽即可，这样会提高性能。</li>
+<li>但列宽会随着浏览器窗口大小进行改变，用户体验不好。</li>
+<li>图片排序是按照垂直顺序排列的，打乱了原有的图片顺序。</li>
+<li>如果想达到滚动到底部图片自动加载的效果，还是需要借助javascript来实现。<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2>这篇博文主要总结了js、jquery和css3三种方法来实现常见的瀑布流布局，其中js实现性能较高，但相对较为复杂，jquery实现较为简单，但是需要引入库文件，会影响性能，css3实现起来最为简便，性能也很高，但是在功能的实现和用户体验上与前面两种还是有很大差距，所以综合来说，推荐使用原生的javascript方法来实现瀑布流布局。</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag"># javascript</a>
+          
+            <a href="/tags/html/" rel="tag"># html</a>
+          
+            <a href="/tags/css3/" rel="tag"># css3</a>
+          
+            <a href="/tags/jquery/" rel="tag"># jquery</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/27/学校网页实例练习总结/" rel="next" title="学校网页实例练习总结">
+                <i class="fa fa-chevron-left"></i> 学校网页实例练习总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/08/JavaScript DOM学习笔记/" rel="prev" title="JavaScript DOM学习笔记">
+                JavaScript DOM学习笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/homepage/yymhk.png"
+               alt="Yin Zhehao" />
+          <p class="site-author-name" itemprop="name">Yin Zhehao</p>
+          <p class="site-description motion-element" itemprop="description">饮水思源 止于至善</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#js实现"><span class="nav-number">2.</span> <span class="nav-text">js实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#通用函数的创建"><span class="nav-number">2.1.</span> <span class="nav-text">通用函数的创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#固定图片数量的瀑布流布局"><span class="nav-number">2.2.</span> <span class="nav-text">固定图片数量的瀑布流布局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#判断是否滚动到尾部"><span class="nav-number">2.3.</span> <span class="nav-text">判断是否滚动到尾部</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态添加图片的瀑布流效果"><span class="nav-number">2.4.</span> <span class="nav-text">动态添加图片的瀑布流效果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jquery实现"><span class="nav-number">3.</span> <span class="nav-text">jquery实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#css3实现"><span class="nav-number">4.</span> <span class="nav-text">css3实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yin Zhehao</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
