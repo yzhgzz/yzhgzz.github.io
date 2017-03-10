@@ -411,7 +411,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> length = <span class="built_in">document</span>.getElementByTagName(<span class="string">"*"</span>).length;</div></pre></td></tr></table></figure>
 </li>
 <li><p><code>getElementByTagName(&quot;tag&quot;) 返回的是一个对象数组，具有数组的length属性，若采用</code>typeof<code>返回其类型，其结果为</code>object`。<br>若针对HTML文档</p>
-<figure class="highlight vbscript-html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;ul&gt;</div><div class="line">	&lt;li&gt; A &lt;/li&gt;</div><div class="line">	&lt;li&gt; B &lt;/li&gt;</div><div class="line">	&lt;li&gt; C &lt;/li&gt;</div><div class="line">&lt;/ul&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight vbscript-html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></div><div class="line">	<span class="tag">&lt;<span class="name">li</span>&gt;</span> A <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">li</span>&gt;</span> B <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">li</span>&gt;</span> C <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>其JS代码为<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> myArray = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"li"</span>);   <span class="comment">//[li,li,li]</span></div><div class="line"><span class="keyword">var</span> length = myArray.length;   <span class="comment">//3</span></div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;length;i++)&#123;</div><div class="line">	<span class="built_in">console</span>.log(myArray[i]);  </div><div class="line">	<span class="comment">// &lt;li&gt; A &lt;/li&gt; &lt;li&gt; B &lt;/li&gt; &lt;li&gt; C &lt;/li&gt;</span></div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(myArray);   <span class="comment">//[li,li,li]</span></div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> myArray);   <span class="comment">//object</span></div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> myArray[<span class="number">0</span>]);  <span class="comment">//object</span></div></pre></td></tr></table></figure></p>
@@ -594,7 +594,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">27</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -612,7 +612,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-count">38</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
