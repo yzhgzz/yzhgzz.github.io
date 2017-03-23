@@ -80,7 +80,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="javascript,DOM," />
+  <meta name="keywords" content="javascript,LHS,RHS," />
 
 
 
@@ -96,16 +96,16 @@
 
 
 
-<meta name="description" content="前言本篇博文记录总结了如何通过创建新元素和修改现有元素来改变网页结果。主要包括传统技术和DOM方法这两种。">
+<meta name="description" content="前言本文主要对JavaScript中的LHS和RHS进行解释介绍，并进行相应的举例说明。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript动态创建标记技术">
-<meta property="og:url" content="http://yinzhehao.top/2016/10/20/JavaScript动态创建标记技术/index.html">
+<meta property="og:title" content="JavaScript中的LHS和RHS">
+<meta property="og:url" content="http://yinzhehao.top/2016/12/15/JavaScript中的LHS和RHS/index.html">
 <meta property="og:site_name" content="Yinzhehao blog">
-<meta property="og:description" content="前言本篇博文记录总结了如何通过创建新元素和修改现有元素来改变网页结果。主要包括传统技术和DOM方法这两种。">
-<meta property="og:updated_time" content="2017-02-27T09:59:34.004Z">
+<meta property="og:description" content="前言本文主要对JavaScript中的LHS和RHS进行解释介绍，并进行相应的举例说明。">
+<meta property="og:updated_time" content="2017-03-23T04:06:55.169Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaScript动态创建标记技术">
-<meta name="twitter:description" content="前言本篇博文记录总结了如何通过创建新元素和修改现有元素来改变网页结果。主要包括传统技术和DOM方法这两种。">
+<meta name="twitter:title" content="JavaScript中的LHS和RHS">
+<meta name="twitter:description" content="前言本文主要对JavaScript中的LHS和RHS进行解释介绍，并进行相应的举例说明。">
 
 
 
@@ -133,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="http://yinzhehao.top/2016/10/20/JavaScript动态创建标记技术/"/>
+  <link rel="canonical" href="http://yinzhehao.top/2016/12/15/JavaScript中的LHS和RHS/"/>
 
 
 
 
 
-  <title> JavaScript动态创建标记技术 | Yinzhehao blog </title>
+  <title> JavaScript中的LHS和RHS | Yinzhehao blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -295,7 +295,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yinzhehao.top/2016/10/20/JavaScript动态创建标记技术/">
+  <link itemprop="mainEntityOfPage" href="http://yinzhehao.top/2016/12/15/JavaScript中的LHS和RHS/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Yin Zhehao">
@@ -319,7 +319,7 @@
             
             
               
-                JavaScript动态创建标记技术
+                JavaScript中的LHS和RHS
               
             
           </h1>
@@ -334,8 +334,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-20T17:51:14+08:00">
-                2016-10-20
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-15T17:51:14+08:00">
+                2016-12-15
               </time>
             
 
@@ -397,34 +397,41 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本篇博文记录总结了如何通过创建新元素和修改现有元素来改变网页结果。主要包括传统技术和DOM方法这两种。<br><a id="more"></a> </p>
-<h2 id="动态创建标记"><a href="#动态创建标记" class="headerlink" title="动态创建标记"></a>动态创建标记</h2><p>本章节将讲述如何通过创建新元素和修改现有元素来改变网页结果。主要包括传统技术和DOM方法这两种。</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文主要对JavaScript中的LHS和RHS进行解释介绍，并进行相应的举例说明。<br><a id="more"></a></p>
+<h2 id="LHS-amp-RHS"><a href="#LHS-amp-RHS" class="headerlink" title="LHS &amp; RHS"></a>LHS &amp; RHS</h2><h3 id="概念分析"><a href="#概念分析" class="headerlink" title="概念分析"></a>概念分析</h3><ul>
+<li>LHS与RHS是JavaScript引擎的两种查找类型，含义是赋值操作的左侧与右侧。</li>
+<li>LHS(Left Hand Side)：对哪个赋值就对哪个进行LHS引用，可以理解为赋值操作的目标。</li>
+<li>RHS(Right Hand Side)：需要获取哪个变量的值，就对哪个变量的值进行RHS引用，理解为赋值操作的源头。</li>
+<li>可以简单的记忆为：一般在左边的需要被赋值，就是LHS引用；右边需要寻找到它的值，就是RHS引用。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">a</span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> b=a;</div><div class="line">	rerurn a+b;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> c=foo(<span class="number">2</span>);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>以上代码中有3个LHS与4个RHS，分析如下：</p>
 <ul>
-<li>传统技术： <code>document.write()</code> ,  <code>innerHTML</code></li>
-<li>DOM技术： <code>createElement</code>,  <code>createTextNode</code>, <code>appendChild</code>,  <code>insertBefore</code><br>(在任何时候，标准的DOM都可以用来替代innerHTML)<h3 id="传统技术"><a href="#传统技术" class="headerlink" title="传统技术"></a>传统技术</h3></li>
-<li><p><code>document.write()</code></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">document</span>.write(<span class="string">"&lt;p&gt;Demo&lt;/p&gt;"</span>);</div></pre></td></tr></table></figure>
+<li><code>var c</code>中的<code>c</code>需要被赋值，在赋值操作的左侧，所以对<code>c</code>进行<code>LHS</code>引用</li>
+<li>变量<code>c</code>需要被赋值，它的值是<code>foo(2)</code>，那么<code>foo(2)</code>的值是多少呢，需要查找<code>foo(2)</code>的值，在赋值操作的右侧，所以对<code>foo(2)</code>进行<code>RHS</code>引用</li>
+<li>隐含赋值操作，将2传递给<code>function foo(a){……}</code>函数的参数<code>a</code>，<code>a</code>在赋值操作的左侧，对<code>a</code>进行<code>LHS</code>引用</li>
+<li><code>var b=a;</code>中，<code>b</code>需要被赋值，处在赋值操作的左侧，所以<code>b</code>进行的<code>LHS</code>，<code>b</code>的值将从<code>a</code>来，那么右侧的<code>a</code>的值从何而来呢？这就需要对赋值操作右侧的<code>a</code>进行<code>RHS</code></li>
+<li><code>return a+b;</code>中，需要找到<code>a</code>与<code>b</code>的值的来源，<code>a</code>与<code>b</code>都在赋值操作的右侧，才能得到<code>a+b</code>的值，所以对<code>a</code>与<code>b</code>都是进行<code>RHS</code>引用<h3 id="异常解释"><a href="#异常解释" class="headerlink" title="异常解释"></a>异常解释</h3>之所以区分LHS和RHS，只因为在遍历还没有声明（在任何作用域中都无法找到该变量）的情况下，这两种查询的行为是不一样的。</li>
+<li>LHS和RHS查询都会在当前执行作用域中开始，如果有需要（即没有在当前作用域中查找到所需的标识符），就会向上级作用域继续查找目标标识符，直至抵达全局作用域，查找停止。</li>
+<li>不成功的RHS引用会导致<code>ReferenceError</code>异常。不成功的LHS引用会导致自动隐式地创建一个全局变量（非严格模式下），该变量使用LHS引用的目标作为标识符，或者抛出<code>ReferenceError</code>异常（严格模式下）。</li>
+<li><code>ReferenceError</code>同作用域判别失败相关，而<code>TypeError</code>则代表作用域判别成功了，但是对结果的操作是非法或者不合理的。查询到变量之后（已经表明作用域判别成功，不会出现<code>ReferenceError</code>异常），对这个变量进行不合理的操作，比如试图对一个非函数类型的值进行函数调用，或者引用null或undefined类型值中的属性，那么引擎会抛出<code>TypeError</code>异常。</li>
+<li><p>ES5中引入了“严格模式”。同正常模式（或称为宽松/懒惰模式相比），严格模式在行为上有很多不同，其中一个不同的行为则是严格模式禁止自动或隐式创建全局变量。因此，严格模式下，LHS查找失败后，不会自动隐式创建全局变量，只会抛出<code>ReferenceError</code>异常。</p>
 </li>
-<li><p><code>innerHTML</code></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> testdiv = <span class="built_in">document</span>.getElementById(<span class="string">"testdiv"</span>);</div><div class="line">testdiv.innerHTML = <span class="string">"Div Content"</span>;</div><div class="line">testdiv.innerHTML = <span class="string">"&lt;p&gt;ChildNode Demo&lt;/p&gt;"</span>;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="DOM技术"><a href="#DOM技术" class="headerlink" title="DOM技术"></a>DOM技术</h3><ul>
-<li><code>createElement</code> ： 创建一个元素节点（不能创建文本节点），但是该节点并未插入DOM树中，是游历于文档之外的。</li>
-<li><code>appendChild</code> ：把新创建的节点插入到文档的DOM树中。</li>
-<li><code>createTextNode</code>： 创建一个文本节点（不能创建元素节点），但是该节点并未插入DOM树中，是游历于文档之外的。</li>
-<li><code>parentNode.insertBefore(newNode,referenceNode)</code>：将一个新节点插入到参考节点之前，这两个节点都是<code>parentNode</code>的子节点。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> parentNode = <span class="built_in">document</span>.getElementById(<span class="string">"content"</span>);</div><div class="line"><span class="keyword">var</span> para = <span class="built_in">document</span>.createElement(<span class="string">"p"</span>);</div><div class="line"><span class="keyword">var</span> txt1 = <span class="built_in">document</span>.createTextNode(<span class="string">"This is"</span>);</div><div class="line">para.appendChild(txt1); <span class="comment">//&lt;p&gt;This is &lt;/p&gt;</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> emphasis = <span class="built_in">document</span>.createElement(<span class="string">"em"</span>);</div><div class="line"><span class="keyword">var</span> txt2 = <span class="built_in">document</span>.createTextNode(<span class="string">" my"</span>);</div><div class="line">emphasis.appendChild(txt2);</div><div class="line">para.appendChild(emphasis); <span class="comment">//&lt;p&gt;This is &lt;em&gt;my&lt;/em&gt; &lt;/p&gt;</span></div><div class="line"></div><div class="line">parentNode.appendChild(para);</div><div class="line"></div><div class="line"><span class="keyword">var</span> txt3 = <span class="built_in">document</span>.createTextNode(<span class="string">" node"</span>);</div><div class="line">para.appendChild(txt3);  <span class="comment">//&lt;p&gt;This is &lt;em&gt;my&lt;/em&gt; node&lt;/p&gt;</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> head1 = <span class="built_in">document</span>.createElement(<span class="string">"h1"</span>);</div><div class="line"><span class="keyword">var</span> txt4 = <span class="built_in">document</span>.createTextNode(<span class="string">"Head 1"</span>);</div><div class="line">head1.appendChild(txt4);  <span class="comment">//&lt;h1&gt;Head 1&lt;/h1&gt;</span></div><div class="line"></div><div class="line">parentNode.insertBefore(head1,para); <span class="comment">//!!</span></div></pre></td></tr></table></figure>
+<li><p>代码1</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">a</span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(a+b);   <span class="comment">// b- RHS, a- RHS</span></div><div class="line">	b = a;              <span class="comment">// b- LHS,  a- RHS</span></div><div class="line">&#125;</div><div class="line">foo(<span class="number">2</span>);</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>上述代码，将创建一个如下所示的HTML文档。注意上述代码中最后一句中<code>insertBefore</code>的用法（将一个新节点插入到父节点中指定的子节点的前面，新插入的节点是父节点的子节点）。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"content"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">h1</span>&gt;</span>Head 1<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">p</span>&gt;</span>This is <span class="tag">&lt;<span class="name">em</span>&gt;</span>my<span class="tag">&lt;/<span class="name">em</span>&gt;</span> node<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>第一次对b进行RHS查询时，无法找到该变量，在其上级作用域（全局作用域）中依旧无法找到变量b，因此，引擎将抛出 <code>ReferenceError</code>异常。</p>
+<p>若将代码1修改，在全局作用域中声明变量b，则在函数foo作用中对b进行RHS查找失败后，会自动向上一级的全局作用域中查找变量b。查找成功后，程序正常输出：12。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">a</span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(a+b);   <span class="comment">// b- RHS, a- RHS</span></div><div class="line">	b = a;              <span class="comment">// b- LHS,  a- RHS</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> b = <span class="number">10</span>;</div><div class="line">foo(<span class="number">2</span>);          <span class="comment">// 输出 12</span></div></pre></td></tr></table></figure></p>
+<p>若将上述代码再次修改，在全局作用域中声明变量b，并在局部作用域中声明变量b，则在函数foo作用中，使用局部变量<code>b=3</code>。全局作用域中，使用局部变量<code>b=10</code>。这种现象称为“遮蔽效应”（内部的标识符“遮蔽”了外部的标识符）。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">a</span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> b = <span class="number">3</span>;</div><div class="line">	<span class="built_in">console</span>.log(a+b);   <span class="comment">// b- RHS, a- RHS  输出：5</span></div><div class="line">	b = a;              <span class="comment">// b- LHS,  a- RHS</span></div><div class="line">	<span class="built_in">console</span>.log(<span class="string">"Global Scope: "</span>+b);           <span class="comment">//2</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> b = <span class="number">10</span>;</div><div class="line"><span class="built_in">console</span>.log(<span class="string">"Global Scope: "</span>+b);    <span class="comment">// 10</span></div><div class="line">foo(<span class="number">2</span>);          <span class="comment">// 输出 12</span></div></pre></td></tr></table></figure></p>
 <ul>
-<li><code>insertAfter()</code><br>DOM本身并没有提供<code>insertAfter()</code>方法，但是可以借助于<code>insertBefore()</code>和<code>appendchild()</code>方法实现该<code>insertAfter()</code>方法。<blockquote>
-<p>parentElement.insertBefore(newElement,targetElement);</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertAfter</span>(<span class="params">newElement,targetElement</span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> parent = targetElement.parentNode;</div><div class="line">	<span class="keyword">if</span>(parentNode.lastChild == targetElement)&#123;</div><div class="line">		parent.appendChild(newElement);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span>&#123;</div><div class="line">		parent.insertBefore(newElement,targetElement.nextSibling);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</blockquote>
+<li>代码2<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params">a</span>)</span>&#123;</div><div class="line">	b = a + <span class="number">3</span>;       </div><div class="line">&#125;</div><div class="line">init(<span class="number">2</span>);    </div><div class="line"><span class="built_in">console</span>.log(b);    <span class="comment">//5</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>上述代码中，<code>nextSibling</code>表示下一个兄弟节点。</p>
+<p>上述代码中，对b进行LHS。局部作用中查找变量b失败后，转向全局变量中查找变量b，依旧失败后，由于是LHS查询，因此会自动隐式创建一个全局变量b（这点与RHS不同）。因此，上述代码可以正常运行，并输出：5。</p>
+<p>若将代码2修改，在局部作用域中声明变量b，则在全局作用域中执行<code>console.log(b);</code>,由于全局作用域中未声明变量b，因此将给出<code>ReferenceError</code>异常：<code>ReferenceError: b is not defined.</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params">a</span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> b = a + <span class="number">3</span>;       </div><div class="line">&#125;</div><div class="line">init(<span class="number">2</span>);    </div><div class="line"><span class="built_in">console</span>.log(b);    <span class="comment">//5</span></div></pre></td></tr></table></figure></p>
+<p>则在函数foo作用中对b进行RHS查找失败后，会自动向上一级的全局作用域中查找变量b。查找成功后，程序正常输出：12。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>[1] <a href="http://www.cnblogs.com/yangxiaoguai132/p/5064625.html" target="_blank" rel="external">javascript中的LHS与RHS</a></p>
 
       
     </div>
@@ -450,7 +457,9 @@
           
             <a href="/tags/javascript/" rel="tag"># javascript</a>
           
-            <a href="/tags/DOM/" rel="tag"># DOM</a>
+            <a href="/tags/LHS/" rel="tag"># LHS</a>
+          
+            <a href="/tags/RHS/" rel="tag"># RHS</a>
           
         </div>
       
@@ -459,8 +468,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/10/08/JavaScript DOM学习笔记/" rel="next" title="JavaScript DOM学习笔记">
-                <i class="fa fa-chevron-left"></i> JavaScript DOM学习笔记
+              <a href="/2016/12/02/前端数据可视化开源库介绍/" rel="next" title="前端数据可视化开源库介绍">
+                <i class="fa fa-chevron-left"></i> 前端数据可视化开源库介绍
               </a>
             
           </div>
@@ -469,8 +478,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/10/25/JavaScript创建标记片段充实内容实践/" rel="prev" title="JavaScript创建标记片段充实内容实践">
-                JavaScript创建标记片段充实内容实践 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/12/27/Web页面加载速度优化实战/" rel="prev" title="Web页面加载速度优化实战">
+                Web页面加载速度优化实战 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -594,7 +603,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态创建标记"><span class="nav-number">2.</span> <span class="nav-text">动态创建标记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#传统技术"><span class="nav-number">2.1.</span> <span class="nav-text">传统技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DOM技术"><span class="nav-number">2.2.</span> <span class="nav-text">DOM技术</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LHS-amp-RHS"><span class="nav-number">2.</span> <span class="nav-text">LHS & RHS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概念分析"><span class="nav-number">2.1.</span> <span class="nav-text">概念分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异常解释"><span class="nav-number">2.2.</span> <span class="nav-text">异常解释</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
