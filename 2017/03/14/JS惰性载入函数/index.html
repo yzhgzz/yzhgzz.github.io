@@ -96,25 +96,16 @@
 
 
 
-<meta name="description" content="[TOC]
-前言本博文主要针对javascript中的惰性载入函数的优化技巧进行总结。
-应用背景尽可能地对浏览器执行脚本的效率和性能问题进行优化是JS一个永恒不变的话题，而惰性载入函数的实现就是针对一些问题有效的解决办法。那到底什么是惰性载入函数以及场景下适合使用此种方法呢？首先先举个例子来抛出这个问题的应用背景。
-我们知道Ajax的核心技术是XMLHttpRequest对象，而创建XMLHttp">
+<meta name="description" content="前言本博文主要针对javascript中的惰性载入函数的优化技巧进行总结。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS惰性载入函数">
 <meta property="og:url" content="http://yinzhehao.top/2017/03/14/JS惰性载入函数/index.html">
 <meta property="og:site_name" content="Yinzhehao blog">
-<meta property="og:description" content="[TOC]
-前言本博文主要针对javascript中的惰性载入函数的优化技巧进行总结。
-应用背景尽可能地对浏览器执行脚本的效率和性能问题进行优化是JS一个永恒不变的话题，而惰性载入函数的实现就是针对一些问题有效的解决办法。那到底什么是惰性载入函数以及场景下适合使用此种方法呢？首先先举个例子来抛出这个问题的应用背景。
-我们知道Ajax的核心技术是XMLHttpRequest对象，而创建XMLHttp">
-<meta property="og:updated_time" content="2017-03-27T14:51:25.412Z">
+<meta property="og:description" content="前言本博文主要针对javascript中的惰性载入函数的优化技巧进行总结。">
+<meta property="og:updated_time" content="2017-03-27T15:04:51.924Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS惰性载入函数">
-<meta name="twitter:description" content="[TOC]
-前言本博文主要针对javascript中的惰性载入函数的优化技巧进行总结。
-应用背景尽可能地对浏览器执行脚本的效率和性能问题进行优化是JS一个永恒不变的话题，而惰性载入函数的实现就是针对一些问题有效的解决办法。那到底什么是惰性载入函数以及场景下适合使用此种方法呢？首先先举个例子来抛出这个问题的应用背景。
-我们知道Ajax的核心技术是XMLHttpRequest对象，而创建XMLHttp">
+<meta name="twitter:description" content="前言本博文主要针对javascript中的惰性载入函数的优化技巧进行总结。">
 
 
 
@@ -406,8 +397,7 @@
       
 
       
-        <p>[TOC]</p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本博文主要针对javascript中的惰性载入函数的优化技巧进行总结。</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本博文主要针对javascript中的惰性载入函数的优化技巧进行总结。<br><a id="more"></a></p>
 <h2 id="应用背景"><a href="#应用背景" class="headerlink" title="应用背景"></a>应用背景</h2><p>尽可能地对浏览器执行脚本的效率和性能问题进行优化是JS一个永恒不变的话题，而惰性载入函数的实现就是针对一些问题有效的解决办法。那到底什么是惰性载入函数以及场景下适合使用此种方法呢？首先先举个例子来抛出这个问题的应用背景。</p>
 <p>我们知道Ajax的核心技术是XMLHttpRequest对象，而创建XMLHttpRequest对象需要考虑到浏览器的兼容问题，所以我们需要通过对象检测的办法创建下面的createXHR()函数来实现跨浏览器创建：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">createXHR</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> XMLHttpRequest != <span class="string">"undefined"</span>) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> ActiveXObject != <span class="string">"undefined"</span>) &#123;</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">arguments</span>.callee.activeXString != <span class="string">"string"</span>) &#123;</div><div class="line">            <span class="keyword">var</span> versions = [<span class="string">"MSXML2.XMLHttp.6.0"</span>, <span class="string">"MSXML2.XMLHttp.3.0"</span>, <span class="string">"MSXML2.XMLHttp"</span>];</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = versions.length; i &lt; len; i++) &#123;</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    <span class="keyword">new</span> ActiveXObect(versions[i]);</div><div class="line">                    <span class="built_in">arguments</span>.callee.activeXString = versions[i];</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                &#125; <span class="keyword">catch</span> (ex) &#123;</div><div class="line">                    <span class="comment">//跳过</span></div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ActiveXObect(<span class="built_in">arguments</span>.callee.activeXString);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"No XHR object available."</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -533,7 +523,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -542,7 +532,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -551,7 +541,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">41</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

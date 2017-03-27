@@ -96,22 +96,16 @@
 
 
 
-<meta name="description" content="[TOC]
-前言本博文主要针对javascript中的函数节流的性能优化技巧进行总结。
-应用背景我们知道浏览器中的DOM操作非常地消耗内存和CPU时间，连续尝试进行过多的DOM相关操作可能会导致浏览器挂起甚至崩溃。但是在浏览器 DOM 事件里面，有一些事件会随着用户的操作不间断触发。比如：重新调整浏览器窗口大小（resize），浏览器页面滚动（scroll），鼠标移动（mousemove）等。也就">
+<meta name="description" content="前言本博文主要针对javascript中的函数节流的性能优化技巧进行总结。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS函数节流">
 <meta property="og:url" content="http://yinzhehao.top/2017/03/06/JS函数节流/index.html">
 <meta property="og:site_name" content="Yinzhehao blog">
-<meta property="og:description" content="[TOC]
-前言本博文主要针对javascript中的函数节流的性能优化技巧进行总结。
-应用背景我们知道浏览器中的DOM操作非常地消耗内存和CPU时间，连续尝试进行过多的DOM相关操作可能会导致浏览器挂起甚至崩溃。但是在浏览器 DOM 事件里面，有一些事件会随着用户的操作不间断触发。比如：重新调整浏览器窗口大小（resize），浏览器页面滚动（scroll），鼠标移动（mousemove）等。也就">
-<meta property="og:updated_time" content="2017-03-27T14:56:18.448Z">
+<meta property="og:description" content="前言本博文主要针对javascript中的函数节流的性能优化技巧进行总结。">
+<meta property="og:updated_time" content="2017-03-27T15:05:10.400Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS函数节流">
-<meta name="twitter:description" content="[TOC]
-前言本博文主要针对javascript中的函数节流的性能优化技巧进行总结。
-应用背景我们知道浏览器中的DOM操作非常地消耗内存和CPU时间，连续尝试进行过多的DOM相关操作可能会导致浏览器挂起甚至崩溃。但是在浏览器 DOM 事件里面，有一些事件会随着用户的操作不间断触发。比如：重新调整浏览器窗口大小（resize），浏览器页面滚动（scroll），鼠标移动（mousemove）等。也就">
+<meta name="twitter:description" content="前言本博文主要针对javascript中的函数节流的性能优化技巧进行总结。">
 
 
 
@@ -403,8 +397,7 @@
       
 
       
-        <p>[TOC]</p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本博文主要针对javascript中的函数节流的性能优化技巧进行总结。</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本博文主要针对javascript中的函数节流的性能优化技巧进行总结。<br><a id="more"></a></p>
 <h2 id="应用背景"><a href="#应用背景" class="headerlink" title="应用背景"></a>应用背景</h2><p>我们知道浏览器中的DOM操作非常地消耗内存和CPU时间，连续尝试进行过多的DOM相关操作可能会导致浏览器挂起甚至崩溃。但是在浏览器 DOM 事件里面，有一些事件会随着用户的操作不间断触发。比如：重新调整浏览器窗口大小（resize），浏览器页面滚动（scroll），鼠标移动（mousemove）等。也就是说用户在触发这些浏览器操作的时候，如果脚本里面绑定了对应的事件处理方法，这个方法就不停的触发。那其中一个解决办法就是采用<strong>函数节流</strong>。</p>
 <h2 id="函数节流原理"><a href="#函数节流原理" class="headerlink" title="函数节流原理"></a>函数节流原理</h2><p>函数节流，就是对会频繁触发的函数事件做一些限制，让这些函数可以在每隔一定的时间或者每次满足一定的条件下再触发。背后思想就是某些代码不可以在没有间断的情况下连续重复执行。我们可以在第一次调用函数的时候创建一个定时器，在指定的时间间隔后运行代码，而在后面每次调用的时候都会清除前面一个并设置另一个定时器，类似于刷新的感觉。<strong>最终目的是使得执行函数只有在最后的请求停止了相应设置的一段时间之后才真正地去执行</strong>。</p>
 <h2 id="具体实现方法"><a href="#具体实现方法" class="headerlink" title="具体实现方法"></a>具体实现方法</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">method, scope</span>) </span>&#123;</div><div class="line">           clearTimeout(method.tId);</div><div class="line">           method.tId= setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">               method.call(scope);</div><div class="line">           &#125;, <span class="number">100</span>);</div><div class="line">       &#125;</div></pre></td></tr></table></figure>
@@ -529,7 +522,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -538,7 +531,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -547,7 +540,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">41</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
